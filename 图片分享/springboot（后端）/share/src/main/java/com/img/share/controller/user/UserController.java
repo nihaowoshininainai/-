@@ -18,14 +18,6 @@ public class UserController {
     private UserService userService;
     @RequestMapping("/login")
     public Statues<User> login(@RequestBody User user){
-        User userlogin = userService.login(user.getUname(), user.getPwd());
-        System.out.println(user.getUname()+user.getPwd());
-        if(userlogin.getUid()==-1){
-            return new Statues<User>(0,"登录失败",userlogin);
-        }
-        else{
-            return new Statues<User>(1,"登录成功",userlogin);
-        }
-        
+        return userService.login(user.getUname(), user.getPwd());    
     }
 }
