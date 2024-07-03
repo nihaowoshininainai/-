@@ -22,8 +22,15 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User regiseter(String uname, String pwd) {
-        return userMapper.count(uname);
+    public Statues<User> regiseter(String uname, String pwd) {
+        User user = userMapper.count(uname);
+        if(user==null){
+            userMapper.register(uname, pwd);
+            return new Statues<User>(1,"注册成功",userMapper.login(uname, pwd)); 
+        }
+        else{
+            return new Statues<User>(0,"注册失败",null);
+        }
     }
 
 }

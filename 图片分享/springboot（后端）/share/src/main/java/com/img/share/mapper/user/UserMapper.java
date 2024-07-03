@@ -12,10 +12,10 @@ public interface UserMapper {
     @Select("select * from user where uname=#{uname} and pwd=#{pwd}")
     public User login(String uname,String pwd);
     /* 重名检测 */
-    @Select("select * from user where uname={#uname}")
+    @Select("select * from user where uname=#{uname}")
     public User count(String uname);
     /* 注册操作 */
-    @Insert("insert into user(uname,pwd) values({#uname},{#pwd})")
-    public User register(String uname,String pwd);
+    @Insert("insert into user(uname,pwd) values(#{uname},#{pwd})")
+    public void register(String uname,String pwd);
 
 }

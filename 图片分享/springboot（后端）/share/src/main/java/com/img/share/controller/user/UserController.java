@@ -20,4 +20,8 @@ public class UserController {
     public Statues<User> login(@RequestBody User user){
         return userService.login(user.getUname(), user.getPwd());    
     }
+    @RequestMapping("/register")
+    public Statues<User> register(@RequestBody User user){
+        return userService.regiseter(user.getUname(), user.getPwd());
+    }
 }
