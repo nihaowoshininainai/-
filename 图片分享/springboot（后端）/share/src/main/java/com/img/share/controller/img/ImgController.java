@@ -18,4 +18,8 @@ public class ImgController {
     public Statues<Integer> add(@RequestBody Img img){
         return imgService.add(img.getIname(), img.getIsrc(), img.getUploaddate(), img.getUser().getUid());
     }
+    @RequestMapping("/deleteImg")
+    public Statues<Integer> delete(@RequestBody Img img){
+        return imgService.delete(img.getIid(), img.getUser().getUid());
+    }
 }
