@@ -1,9 +1,13 @@
 package com.img.share.controller.img;
 
+import java.io.IOException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.img.share.dao.Img;
 import com.img.share.dao.Statues;
@@ -15,11 +19,15 @@ public class ImgController {
     @Autowired
     private ImgService imgService;
     @RequestMapping("/addImg")
-    public Statues<Integer> add(@RequestBody Img img){
-        return imgService.add(img.getIname(), img.getIsrc(), img.getUploaddate(), img.getUser().getUid());
+    public Statues<Integer> add(@RequestParam("file") MultipartFile file,@RequestParam("iname") String filename,@RequestParam("uid") Integer uid) throws IllegalStateException, IOException{
+        return imgService.add(file,filename,uid);
     }
     @RequestMapping("/deleteImg")
     public Statues<Integer> delete(@RequestBody Img img){
         return imgService.delete(img.getIid(), img.getUser().getUid());
+    }
+    @RequestMapping("/search")
+    public Statues<List<Img>> search(@RequestParam("order") String order,@RequestParam("count") Integer count,@RequestParam("page") Integer page){
+        return imgService.search(order, page, count);
     }
 }
