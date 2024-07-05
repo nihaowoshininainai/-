@@ -22,8 +22,14 @@ public class ImgServiceImp implements ImgService{
     @Override
     public Statues<Integer> add(MultipartFile file,String iname,Integer uid) throws IllegalStateException, IOException {
         long time = System.currentTimeMillis();
-        String filepath = FILEDIR+iname+time+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+        String filepath = FILEDIR+uid+"/"+iname+time+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
         File newFile = new File(filepath);
+        File dir = newFile.getParentFile();
+        if (!dir.exists()) {
+            // 创建文件夹
+            dir.mkdirs();
+        }
+        // 创建文件
         file.transferTo(newFile);
         System.out.println(new SimpleDateFormat().format(new Date(time)));
         Integer a = imgMapper.add(iname,filepath,new SimpleDateFormat().format(new Date(time)),uid);
