@@ -1,6 +1,6 @@
 package com.img.share.mapper.img;
 
-import java.sql.Date;
+
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
