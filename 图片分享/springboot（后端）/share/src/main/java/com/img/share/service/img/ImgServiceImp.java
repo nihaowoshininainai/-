@@ -3,6 +3,7 @@ package com.img.share.service.img;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,8 @@ public class ImgServiceImp implements ImgService{
         String filepath = FILEDIR+iname+time+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
         File newFile = new File(filepath);
         file.transferTo(newFile);
-        Integer a = imgMapper.add(iname,filepath,new Date(time),uid);
+        System.out.println(new SimpleDateFormat().format(new Date(time)));
+        Integer a = imgMapper.add(iname,filepath,new SimpleDateFormat().format(new Date(time)),uid);
         if(a!=1){
             return new Statues<Integer>(0,"插入失败",null);
         }
