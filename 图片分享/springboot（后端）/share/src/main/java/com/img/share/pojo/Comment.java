@@ -15,4 +15,5 @@ public class Comment {
     private Date commdate;
     private User user;
     private int  clicklike;
+    private String content;
 }
