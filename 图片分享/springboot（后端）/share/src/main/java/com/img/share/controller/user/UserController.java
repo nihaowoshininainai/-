@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.img.share.dao.Statues;
-import com.img.share.dao.User;
+import com.img.share.pojo.Statues;
+import com.img.share.pojo.User;
 import com.img.share.service.user.UserService;
 
 @RestController

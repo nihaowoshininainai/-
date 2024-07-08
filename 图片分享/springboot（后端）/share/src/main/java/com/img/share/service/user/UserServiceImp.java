@@ -3,9 +3,9 @@ package com.img.share.service.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.img.share.dao.Statues;
-import com.img.share.dao.User;
 import com.img.share.mapper.user.UserMapper;
+import com.img.share.pojo.Statues;
+import com.img.share.pojo.User;
 @Service
 public class UserServiceImp implements UserService {
     @Autowired

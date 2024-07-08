@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import com.img.share.dao.Img;
+import com.img.share.pojo.Img;
 
 @Mapper
 public interface ImgMapper {

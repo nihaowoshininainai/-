@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.img.share.dao.Img;
-import com.img.share.dao.Statues;
+import com.img.share.pojo.Img;
+import com.img.share.pojo.Statues;
 import com.img.share.service.img.ImgService;
 @CrossOrigin
 @RestController

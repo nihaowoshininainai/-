@@ -1,7 +1,7 @@
 package com.img.share.service.user;
 
-import com.img.share.dao.Statues;
-import com.img.share.dao.User;
+import com.img.share.pojo.Statues;
+import com.img.share.pojo.User;
 
 public interface UserService {
     public Statues<User> login(String uname,String pwd);

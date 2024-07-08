@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.img.share.dao.Img;
-import com.img.share.dao.Statues;
 import com.img.share.mapper.img.ImgMapper;
+import com.img.share.pojo.Img;
+import com.img.share.pojo.Statues;
 @Service
 public class ImgServiceImp implements ImgService{
     public static final String FILEDIR = "D:/c/";

@@ -1,4 +1,4 @@
-package com.img.share.dao;
+package com.img.share.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

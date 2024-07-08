@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.img.share.dao.Img;
-import com.img.share.dao.Statues;
+import com.img.share.pojo.Img;
+import com.img.share.pojo.Statues;
 
 public interface ImgService {
     public Statues<Integer> add(MultipartFile file,String iname,Integer uid) throws IllegalStateException, IOException;

@@ -1,18 +1,18 @@
-package com.img.share.dao;
+package com.img.share.pojo;
 
 import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Img {
-    private Integer iid;
-    private String iname;
-    private String isrc;
-    private Date uploaddate;
+public class Comment {
+    private Integer cid;
+    private Img img;
+    private Date commdate;
     private User user;
-    private Integer pageview;
+    private int  clicklike;
 }
