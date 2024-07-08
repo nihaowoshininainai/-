@@ -33,4 +33,15 @@ public class CommentServiceImp implements CommentService{
         }
     }
 
+    @Override
+    public Statues <Integer> delComment(Integer cid){
+        Integer a = commentMapper.delComment(cid);
+        if(a==0){
+            return new Statues<>(0,"删除失败",null);
+        }
+        else{
+            return new Statues<>(1,"删除成功",null);
+        }
+    }
+
 }

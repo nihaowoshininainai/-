@@ -2,6 +2,7 @@ package com.img.share.mapper.comment;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -15,4 +16,7 @@ public interface CommentMapper {
     /*增 */
     @Insert("insert into comment(iid,commdate,uid,content) values(#{iid},#{commdate},#{uid},#{content})")
     public Integer addComment(Integer iid,String commdate,Integer uid,String content);
+    /*删 */
+    @Delete("delete from comment where cid=#{cid}")
+    public Integer delComment(Integer cid);
 }
