@@ -26,10 +26,10 @@ public class CommentServiceImp implements CommentService{
         long time = System.currentTimeMillis();
         Integer a = commentMapper.addComment(iid, new SimpleDateFormat().format(new Date(time)), uid, content);
         if(a!=1){
-            return new Statues<>(0,"插入失败",null);
+            return new Statues<>(0,"添加评论失败",null);
         }
         else{
-            return new Statues<>(1,"插入成功",null);
+            return new Statues<>(1,"添加评论成功",null);
         }
     }
 

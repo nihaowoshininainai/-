@@ -35,10 +35,10 @@ public class ImgServiceImp implements ImgService{
         System.out.println(new SimpleDateFormat().format(new Date(time)));
         Integer a = imgMapper.add(iname,filepath,new SimpleDateFormat().format(new Date(time)),uid);
         if(a!=1){
-            return new Statues<Integer>(0,"插入失败",null);
+            return new Statues<Integer>(0,"添加图片失败",null);
         }
         else{
-            return new Statues<Integer>(1,"插入成功",null);
+            return new Statues<Integer>(1,"添加图片成功",null);
         }
     }
 
