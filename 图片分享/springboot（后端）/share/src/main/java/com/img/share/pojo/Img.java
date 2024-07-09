@@ -1,6 +1,7 @@
 package com.img.share.pojo;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,4 +16,5 @@ public class Img {
     private Date uploaddate;
     private User user;
     private Integer pageview;
+    private List<Comment> comment;
 }
