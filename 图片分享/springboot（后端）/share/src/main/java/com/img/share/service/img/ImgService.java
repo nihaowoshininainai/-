@@ -12,4 +12,5 @@ public interface ImgService {
     public Statues<Integer> add(MultipartFile file,String iname,Integer uid) throws IllegalStateException, IOException;
     public Statues<Integer> delete(Integer iid, Integer uid);
     public Statues<List<Img>> search(String order,Integer page,Integer count);
+    public Statues<Integer> getCount();
 }

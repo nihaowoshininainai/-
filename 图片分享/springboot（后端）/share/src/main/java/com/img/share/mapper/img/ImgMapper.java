@@ -18,6 +18,9 @@ public interface ImgMapper {
     /* 删 */
     @Delete("delete from img where iid=#{iid} and uid=#{uid}")
     public Integer delete(Integer iid, Integer uid);
+    /* 获取总数 */
+    @Select("select count(*) from img")
+    public Integer getCount();
     /* 分页查 */
     @Select("select * from img order by #{order} limit #{start},#{count}")
     public List<Img> search(String order,Integer start,Integer count); 

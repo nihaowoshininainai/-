@@ -31,4 +31,8 @@ public class ImgController {
     public Statues<List<Img>> search(@RequestParam("order") String order,@RequestParam("count") Integer count,@RequestParam("page") Integer page){
         return imgService.search(order, page, count);
     }
+    @RequestMapping("/getCount")
+    public Statues<Integer> getCount(){
+        return imgService.getCount();
+    }
 }

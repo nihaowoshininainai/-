@@ -60,6 +60,11 @@ public class ImgServiceImp implements ImgService{
         System.out.println(imgMapper.search(order, (page-1)*count, count));
         return new Statues<>(1,message,imgMapper.search(order, (page-1)*count, count));
     }
+
+    @Override
+    public Statues<Integer> getCount(){
+        return new Statues<>(1,"获取成功",imgMapper.getCount());
+    }
     
 
 }
