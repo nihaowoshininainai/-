@@ -26,7 +26,7 @@ public class CommentController {
     public Statues<Integer> addComment(@RequestBody Comment comment){
         return commentService.addComment(comment.getImg().getIid(),comment.getUser().getUid(),comment.getContent());
     }
-    @RequestMapping("delComment")
+    @RequestMapping("/delComment")
     public Statues<Integer> delComment(@RequestBody Comment comment){
         return commentService.delComment(comment.getCid());
     }
