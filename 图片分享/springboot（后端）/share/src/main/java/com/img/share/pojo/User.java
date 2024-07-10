@@ -15,4 +15,5 @@ public class User {
     private String pwd;
     private List<Img> img;
     private List<Comment> comment;
+    private List<Img> likeImgs;
 }

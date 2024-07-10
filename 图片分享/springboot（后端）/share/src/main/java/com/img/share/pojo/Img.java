@@ -17,4 +17,5 @@ public class Img {
     private User user;
     private Integer pageview;
     private List<Comment> comment;
+    private List<User> likUsers;
 }
