@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useUserStore } from '@/stores/user';
 import type { FormRules, FormInstance } from 'element-plus';
 
     interface LoginForm{
@@ -32,9 +33,11 @@ import type { FormRules, FormInstance } from 'element-plus';
         if(!formEl) return
         formEl.validate((valid)=>{
             if(valid){
-                
+                useUserStore().login(loginForm.uname,loginForm.pwd)
+                loginForm.uname = ''
+                loginForm.pwd = ''
             } else{
-                alert(2)
+                console.log("出错了！")
             }
         })
     }
@@ -48,13 +51,13 @@ import type { FormRules, FormInstance } from 'element-plus';
         :rules="rules"
         label-width="auto"
         label-position="top"
-        hide-required-asterisk="true"
+        :hide-required-asterisk=true
     >
         <el-form-item label="用户名" prop="uname">
             <el-input v-model="loginForm.uname" />
         </el-form-item>
         <el-form-item label="密码" prop="pwd">
-            <el-input v-model="loginForm.pwd" type="password" />
+            <el-input v-model="loginForm.pwd" type="password" @click="submitForm(loginFormRef)" />
         </el-form-item>
         <el-form-item>
             <el-button @click="submitForm(loginFormRef)" type="primary" style="margin: 0 auto;">登录</el-button>
