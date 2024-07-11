@@ -2,5 +2,5 @@
 
 </script>
 <template>
-    这是首页
+    这是注册界面
 </template>
