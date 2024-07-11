@@ -3,7 +3,6 @@ package com.img.share.controller.comment;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.img.share.pojo.Comment;
 import com.img.share.pojo.Statues;
 import com.img.share.service.comment.CommentService;
-@CrossOrigin
+
 @RestController
 @RequestMapping("/api")
 public class CommentController {
