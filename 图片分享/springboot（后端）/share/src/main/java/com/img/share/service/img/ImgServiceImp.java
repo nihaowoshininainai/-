@@ -15,7 +15,8 @@ import com.img.share.pojo.Img;
 import com.img.share.pojo.Statues;
 @Service
 public class ImgServiceImp implements ImgService{
-    public static final String FILEDIR = "D:/c/";
+    public static final String FILEDIR = "/mnt/img/";
+    /* public static final String FILEDIR = "D:/c/img"; */
     @Autowired
     private ImgMapper imgMapper;
 
@@ -32,8 +33,8 @@ public class ImgServiceImp implements ImgService{
         }
         // 创建文件
         file.transferTo(newFile);
-        System.out.println(new SimpleDateFormat().format(new Date(time)));
-        Integer a = imgMapper.add(iname,filepath,new SimpleDateFormat().format(new Date(time)),uid);
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(time)));
+        Integer a = imgMapper.add(iname,filepath,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(time)),uid);
         if(a!=1){
             return new Statues<Integer>(0,"添加图片失败",null);
         }
