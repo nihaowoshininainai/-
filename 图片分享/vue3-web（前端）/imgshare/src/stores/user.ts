@@ -30,8 +30,17 @@ export const useUserStore = defineStore('user',()=>{
             }
         })
     }
+    function getUid(){
+        console.log(user.value.uid);
+        
+        return user.value.uid
+    }
     return{
-        login
+        login,
+        getUid,
+        user
     }
 
+},{
+    persist:true
 })

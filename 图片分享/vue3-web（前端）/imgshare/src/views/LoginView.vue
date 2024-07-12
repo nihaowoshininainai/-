@@ -86,7 +86,7 @@ import type { FormRules, FormInstance } from 'element-plus';
         width: 25rem;
         margin: 0 auto;
     }
-    @media screen and (max-width:750px) {
+    @media screen and (max-width:800px) {
         .el-row{
             width: 100%;
             flex-direction: column;
@@ -94,7 +94,8 @@ import type { FormRules, FormInstance } from 'element-plus';
         }
         .left{
             align-self: center;
-            width: 100%;
+            max-width: unset;
+            width: 15em;
         }
         .el-form{
             width: 100%;
