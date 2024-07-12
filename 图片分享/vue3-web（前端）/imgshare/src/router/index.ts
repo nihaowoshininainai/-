@@ -9,27 +9,27 @@ const router = createRouter({
     {
       path: '/',
       name: 'main',
-      redirect:'/home',
-      children:[
+      redirect: '/home',
+      children: [
         {
-          path:'home',
-          name:'home',
-          component:HomeView
+          path: 'home',
+          name: 'home',
+          component: HomeView
         },
         {
-          path:'login',
-          name:'login',
-          component:LoginView
+          path: 'login',
+          name: 'login',
+          component: LoginView
         },
         {
-          path:'register',
-          name:'register',
-          component:RegisterView
+          path: 'register',
+          name: 'register',
+          component: RegisterView
         },
         {
-          path:'user',
-          name:'user',
-          component:UserView
+          path: 'user',
+          name: 'user',
+          component: UserView
         }
       ]
     }
