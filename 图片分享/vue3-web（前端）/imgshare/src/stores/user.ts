@@ -30,15 +30,29 @@ export const useUserStore = defineStore('user', () => {
             }
         })
     }
-    function getUid() {
-        console.log(user.value.uid);
-
-        return user.value.uid
+    function register(uname: string, pwd: string) {
+        user.value.uname = uname
+        user.value.pwd = pwd
+        request.post('register', user.value).then((res) => {
+            const data = res.data
+            console.log(data);
+            const { code, message, date } = data
+            if (code === 0) {
+                ElMessage.error(message + '用户名重复')
+                user.value = new User()
+            } else {
+                ElMessage.success(message)
+                user.value.uid = date.uid
+                console.log(user.value);
+                router.push('/home')
+            }
+            
+        })
     }
     return {
         login,
-        getUid,
-        user
+        user,
+        register
     }
 
 }, {
