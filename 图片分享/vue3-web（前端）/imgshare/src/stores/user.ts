@@ -1,6 +1,4 @@
-import { request } from "@/api/request"
 import { User } from "@/pojo/User"
-import router from "@/router"
 import userApi from "@/api/user"
 
 
