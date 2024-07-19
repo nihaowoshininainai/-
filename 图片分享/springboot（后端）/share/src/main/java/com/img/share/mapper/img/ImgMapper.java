@@ -24,7 +24,7 @@ public interface ImgMapper {
     @Select("select count(*) from img")
     public Integer getCount();
     /* 分页查 */
-    @Select("select i.iid,i.iname,i.isrc,i.uploaddate,i.pageview,u.uid,u.uname from img i left join `user` u on i.uid = u.uid order by #{order} limit #{start},#{count}")
+    @Select("select i.iid,i.iname,i.isrc,i.uploaddate,i.pageview,u.uid,u.uname from img i left join `user` u on i.uid = u.uid order by ${order} desc limit #{start},#{count}")
     @Results({
         @Result(property = "user.uid",column = "uid"),
         @Result(property = "user.uname",column = "uname")
