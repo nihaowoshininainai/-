@@ -16,7 +16,7 @@ console.log(widowWidth);
 
 
 if (widowWidth < 1300) {
-    span.value = 6
+    span.value = 8
 }
 
 const getCount = async () => {
@@ -45,10 +45,10 @@ const changeOrder = (e: any) => {
 </script>
 <template>
     <el-row style="text-align: center;">
-            <el-col :span="3">
+            <el-col :span="span">
                 <el-link @click="changeOrder">按日期</el-link>
             </el-col>
-            <el-col :span="3">
+            <el-col :span="span">
                 <el-link @click="changeOrder">按热度</el-link>
             </el-col>
         </el-row>
@@ -82,5 +82,10 @@ const changeOrder = (e: any) => {
     .el-pagination{
         margin-top: 5rem;
         justify-content: center;
+    }
+    @media screen and (max-width:1300px) {
+        .content{
+            width: 90%;
+        }
     }
 </style>
