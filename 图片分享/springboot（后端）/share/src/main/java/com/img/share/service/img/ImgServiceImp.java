@@ -16,8 +16,8 @@ import com.img.share.pojo.Statues;
 
 @Service
 public class ImgServiceImp implements ImgService {
-    /* public static final String FILEDIR = "/mnt/img/"; */
-    public static final String FILEDIR = "D:/c/img";
+    public static final String FILEDIR = "/mnt/img/";
+    /* public static final String FILEDIR = "D:/c/img"; */
     @Autowired
     private ImgMapper imgMapper;
 
