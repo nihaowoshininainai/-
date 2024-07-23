@@ -6,7 +6,9 @@ const order = ref('uploaddate')
 
 const count = ref(0)
 
-const page = ref(18)
+const pageSize = ref(18)
+
+const page = ref(1)
 
 const span = ref(4)
 
@@ -29,7 +31,7 @@ const getCount = async () => {
 
 onBeforeMount(() => {
     getCount()
-    useImgStore().getImgs(order.value,page.value)
+    useImgStore().getImgs(order.value,pageSize.value,page.value)
 })
 
 const changeOrder = (e: any) => {
@@ -38,9 +40,14 @@ const changeOrder = (e: any) => {
         order.value = 'uploaddate'
     else
         order.value = 'pageview'
-    useImgStore().getImgs(order.value,page.value)
+    useImgStore().getImgs(order.value,pageSize.value,page.value)
 }
 
+console.log(page.value);
+
+const changePage = () => {
+    useImgStore().getImgs(order.value,pageSize.value,page.value)
+}
 
 </script>
 <template>
@@ -59,7 +66,7 @@ const changeOrder = (e: any) => {
         </el-col>
     </el-row>
     </div>
-    <el-pagination background layout="prev, pager, next" :total="count" :page-size="page" />
+    <el-pagination background layout="prev, pager, next" :total="count" :page-size="pageSize" v-model:current-page="page"  @current-change="changePage" />
 </template>
 
 <style lang="less" scoped>
