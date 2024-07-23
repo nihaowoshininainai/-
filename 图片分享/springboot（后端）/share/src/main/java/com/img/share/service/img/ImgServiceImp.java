@@ -95,4 +95,13 @@ public class ImgServiceImp implements ImgService {
         return new Statues<>(1, "获取成功", imgMapper.getCount());
     }
 
+    @Override
+    public Statues<List<Img>> getLikeImg(Integer uid) {
+        return new Statues<>(1, "获取成功", imgMapper.getLikeImg(uid));
+    }
+
+    @Override
+    public Statues<List<Img>> getUserImg(Integer uid) {
+        return new Statues<>(1, "或取成功", imgMapper.getUserImg(uid));
+    }
 }

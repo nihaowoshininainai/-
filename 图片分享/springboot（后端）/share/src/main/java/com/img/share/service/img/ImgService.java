@@ -9,8 +9,16 @@ import com.img.share.pojo.Img;
 import com.img.share.pojo.Statues;
 
 public interface ImgService {
-    public Statues<Integer> add(MultipartFile file,String iname,Integer uid) throws IllegalStateException, IOException;
+    public Statues<Integer> add(MultipartFile file, String iname, Integer uid)
+            throws IllegalStateException, IOException;
+
     public Statues<Integer> delete(Integer iid, Integer uid);
-    public Statues<List<Img>> search(String order,Integer page,Integer count);
+
+    public Statues<List<Img>> search(String order, Integer page, Integer count);
+
     public Statues<Integer> getCount();
+
+    public Statues<List<Img>> getLikeImg(Integer uid);
+
+    public Statues<List<Img>> getUserImg(Integer uid);
 }
