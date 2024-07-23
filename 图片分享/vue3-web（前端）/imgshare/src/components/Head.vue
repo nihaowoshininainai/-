@@ -26,7 +26,7 @@ const user = useUserStore().user
             <el-text><el-input :prefix-icon="Search"></el-input></el-text>
         </el-col>
         <el-col :span="4">
-            <router-link to="/user"><el-link :underline="false">用户</el-link></router-link>
+            <router-link :to="'/uid/'+user.uid"><el-link :underline="false">用户</el-link></router-link>
         </el-col>
     </el-row>
 </template>
