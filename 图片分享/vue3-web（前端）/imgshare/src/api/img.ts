@@ -9,7 +9,17 @@ const getImgs = async (order: string,count:number, page: number) => {
 const getCount = () => {
    return request.get('/getCount')
 }
+
+const getUserImg = async (uid:number) => {
+    return request.get(`/getUserImg?uid=${uid}`)
+}
+
+const getLikeImg = (uid: number) => {
+    return request.get(`/getLikeImg?uid=${uid}`)
+}
 export default {
     getImgs: getImgs,
-    getCount:getCount
+    getCount: getCount,
+    getUserImg: getUserImg,
+    getLikeImg: getLikeImg
 }
