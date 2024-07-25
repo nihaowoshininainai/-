@@ -28,7 +28,7 @@ public class ImgController {
 
     @RequestMapping("/deleteImg")
     public Statues<Integer> delete(@RequestBody Img img) {
-        return imgService.delete(img.getIid(), img.getUser().getUid());
+        return imgService.delete(img.getIid(), img.getUser().getUid(),img.getIsrc());
     }
 
     @RequestMapping("/search")

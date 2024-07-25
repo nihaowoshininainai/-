@@ -54,6 +54,20 @@ public class ImgServiceImp implements ImgService {
         }
     }
 
+    class DelImg extends Thread {
+        String path;
+
+        public DelImg(String path) {
+            this.path = path;
+        }
+
+        @Override
+        public void run() {
+            File file = new File(path);
+            file.delete();
+        }
+    }
+
     @Override
     public Statues<Integer> add(MultipartFile file, String iname, Integer uid)
             throws IllegalStateException, IOException {
@@ -73,7 +87,9 @@ public class ImgServiceImp implements ImgService {
     }
 
     @Override
-    public Statues<Integer> delete(Integer iid, Integer uid) {
+    public Statues<Integer> delete(Integer iid, Integer uid,String path) {
+        DelImg delImg = new DelImg(path);
+        delImg.start();
         Integer a = imgMapper.delete(iid, uid);
         if (a == 0) {
             return new Statues<>(0, "删除失败", null);
