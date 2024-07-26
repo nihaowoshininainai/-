@@ -62,7 +62,7 @@ const changePage = () => {
     <div class="content">
         <el-row :gutter="20">
         <el-col v-for="item in useImgStore().imgs" :span="span">
-            <el-col :style="`background-image: url(${item.isrc});`"></el-col>
+            <router-link :to="`/img/${item.iid}`"><el-col :style="`background-image: url(${item.isrc});`"></el-col></router-link>
         </el-col>
     </el-row>
     </div>
