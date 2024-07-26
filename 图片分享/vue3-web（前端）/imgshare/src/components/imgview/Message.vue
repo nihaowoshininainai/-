@@ -2,17 +2,18 @@
 import { Img } from '@/pojo/Img';
 
 
-const k = defineProps < {
+defineProps < {
     img:Img
 }>()
-console.log(k.img);
 
 </script>
 <template>
     <el-row>
         <el-col :span="6">
             <el-text tag="b" size="large">
-                {{ img.user.uname }}
+                作者：<el-link :href="'/uid/'+`${img.user.uid}`">
+                    <el-text tag="b" size="large">{{ img.user.uname }}</el-text>
+                </el-link>
             </el-text>
         </el-col>
         <el-col :span="6">
