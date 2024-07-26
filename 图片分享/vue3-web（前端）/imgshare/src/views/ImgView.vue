@@ -2,14 +2,17 @@
 import Comment from '@/components/imgview/Comment.vue';
 import Message from '@/components/imgview/Message.vue';
 import { Img } from '@/pojo/Img';
-import { useUserStore } from '@/stores/user';
+import { useImgStore } from '@/stores/img';
 
 const iid = useRoute().params.iid
+console.log(iid);
+
 const img = ref<Img>(new Img())
-useUserStore().user.img.forEach((element) => {
+useImgStore().imgs.forEach((element) => {
+    console.log(iid);
+    
     if (Number(iid) === element.iid)
         img.value = element
-
 })
 
 </script>
