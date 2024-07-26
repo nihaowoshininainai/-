@@ -18,8 +18,8 @@ const change = (e: any) => {
 <template>
     <div class="di"></div>
     <el-row style="margin: 10px;">
-        <el-col :span="8"><el-link @click="change">我的作品</el-link></el-col>
-        <el-col :span="8"><el-link @click="change">我喜欢的作品</el-link></el-col>
+        <el-col :span="8"><el-link @click="change">作品</el-link></el-col>
+        <el-col :span="8"><el-link @click="change">喜欢的作品</el-link></el-col>
         <el-col :span="8"><el-link @click="change">上传</el-link></el-col>
     </el-row>
     <el-row>
