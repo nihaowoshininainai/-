@@ -9,6 +9,9 @@ const delImg = (index: number, img: Img) => {
     delimg.isrc = img.isrc.replace(global.host,global.original)
     useUserStore().deleteImg(delimg)
 }
+defineProps < {
+    flag:boolean
+}>()
 
 </script>
 
@@ -20,7 +23,7 @@ const delImg = (index: number, img: Img) => {
                 <el-table-column prop="isrc" label="图片路径" align="center" />
                 <el-table-column fixed="right" label="操作" align='center'>
                     <template #default="scope">
-                        <el-button link type="primary" size="small" @click="delImg(scope.$index, scope.row)">
+                        <el-button link type="primary" size="small" @click="delImg(scope.$index, scope.row)" v-if="flag">
                             删除
                         </el-button>
                         <el-button link type="primary" size="small">查看图片</el-button>

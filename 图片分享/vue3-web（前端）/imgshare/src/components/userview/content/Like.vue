@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user';
+defineProps < {
+    flag:boolean
+}>()
 </script>
 
 <template>
@@ -11,7 +14,7 @@ import { useUserStore } from '@/stores/user';
                 <el-table-column prop="isrc" label="图片路径" align="center" />
                 <el-table-column fixed="right" label="操作" align='center'>
                     <template #default>
-                        <el-button link type="primary" size="small" @click="">
+                        <el-button link type="primary" size="small" @click="" v-if="flag" >
                             移除
                         </el-button>
                         <el-button link type="primary" size="small">查看图片</el-button>
