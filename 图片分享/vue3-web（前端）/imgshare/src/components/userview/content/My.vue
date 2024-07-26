@@ -1,16 +1,26 @@
 <script setup lang="ts">
+import global from '@/globalVariable/global';
+import { Img } from '@/pojo/Img';
 import { useUserStore } from '@/stores/user';
+const delImg = (index: number, img: Img) => {
+    const delimg = new Img()
+    delimg.iid = img.iid
+    delimg.user.uid = useUserStore().user.uid
+    delimg.isrc = img.isrc.replace(global.host,global.original)
+    useUserStore().deleteImg(delimg)
+}
+
 </script>
 
 <template>
-                <el-table :data="useUserStore().user.img" :border=true style="width: 80%;margin: 0 auto;height: 500px;">
+                <el-table :data="(useUserStore().user.img[0]!=null)?useUserStore().user.img:null" :border=true style="width: 80%;margin: 0 auto;height: 500px;">
                 <el-table-column prop="iname" label="图片名" align="center" />
                 <el-table-column prop="pageview" label="浏览量" align="center" />
                 <el-table-column prop="uploaddate" label="上传时间" align="center" />
                 <el-table-column prop="isrc" label="图片路径" align="center" />
                 <el-table-column fixed="right" label="操作" align='center'>
-                    <template #default>
-                        <el-button link type="primary" size="small" @click="">
+                    <template #default="scope">
+                        <el-button link type="primary" size="small" @click="delImg(scope.$index, scope.row)">
                             删除
                         </el-button>
                         <el-button link type="primary" size="small">查看图片</el-button>
