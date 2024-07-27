@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import global from '@/globalVariable/global';
 import { Img } from '@/pojo/Img';
+import { useImgStore } from '@/stores/img';
 import { useUserStore } from '@/stores/user';
 const delImg = (index: number, img: Img) => {
     const delimg = new Img()
@@ -13,13 +14,12 @@ const delImg = (index: number, img: Img) => {
 }
 defineProps < {
     flag: boolean,
-    imgs:Img[]
 }>()
 
 </script>
 
 <template>
-                <el-table :data="(imgs[0]!=null)?imgs:null" :border=true style="width: 80%;margin: 0 auto;height: 500px;" v-if="imgs">
+                <el-table :data="(flag)?useUserStore().user.img:useImgStore().userImgs" :border=true style="width: 80%;margin: 0 auto;height: 500px;">
                 <el-table-column prop="iname" label="图片名" align="center" />
                 <el-table-column prop="pageview" label="浏览量" align="center" />
                 <el-table-column prop="uploaddate" label="上传时间" align="center" />

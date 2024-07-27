@@ -12,13 +12,9 @@ console.log(uid);
 if (flag.value) {
     span.value = 8
     useUserStore().getImgs()
-    imgs.value = useUserStore().user.img
-
 }
 else {
-    useImgStore().getUserImgs(uid)
-    imgs.value = useImgStore().userImgs
-    
+    useImgStore().getUserImgs(uid) 
 }
 
 const change = (e: any) => {
@@ -27,18 +23,15 @@ const change = (e: any) => {
     if ('作品' === content.value) {
         if (flag.value) {
             useUserStore().getImgs()
-            imgs.value = useUserStore().user.img
         } else {
-            imgs.value = useImgStore().userImgs
+            useImgStore().getUserImgs(uid) 
         }
     }
     else if ('喜欢的作品' === content.value) {
         if (flag.value) {
             useUserStore().getLikeImg()
-            imgs.value = useUserStore().user.likeImgs
         } else {
             useImgStore().getLikeImgs(uid)
-            imgs.value = useImgStore().likeImgs
         }
     }
 
@@ -55,10 +48,10 @@ const change = (e: any) => {
     </el-row>
     <el-row>
         <el-col v-if="'作品' === content">
-            <My :flag="flag" :imgs="imgs"></My>
+            <My :flag="flag"></My>
         </el-col>
         <el-col v-if="'喜欢的作品' === content">
-            <Like :flag="flag" :imgs="imgs"></Like>
+            <Like :flag="flag"></Like>
         </el-col>
         <el-col v-if="'上传' === content" style="margin-top: 40px;">
             <Upload></Upload>
