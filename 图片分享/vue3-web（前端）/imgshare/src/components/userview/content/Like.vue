@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { useUserStore } from '@/stores/user';
+import type { Img } from '@/pojo/Img';
 defineProps < {
-    flag:boolean
+    flag: boolean,
+    imgs: Img[]
 }>()
 </script>
 
 <template>
-    <el-table :data="useUserStore().user.likeImgs" :border=true
+    <el-table :data="(imgs[0]===null)?[]:imgs" :border=true
                 style="width: 80%;margin: 0 auto;height: 500px;">
                 <el-table-column prop="iname" label="图片名" align="center" />
                 <el-table-column prop="pageview" label="浏览量" align="center" />

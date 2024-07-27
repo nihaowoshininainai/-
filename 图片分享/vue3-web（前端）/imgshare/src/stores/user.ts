@@ -45,6 +45,8 @@ export const useUserStore = defineStore('user', () => {
             ElMessage.success(message)
             location.reload()
         }
+        console.log(message);
+        
     }
     return {
         login,

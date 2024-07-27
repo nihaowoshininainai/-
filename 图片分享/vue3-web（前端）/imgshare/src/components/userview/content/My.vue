@@ -6,17 +6,22 @@ const delImg = (index: number, img: Img) => {
     const delimg = new Img()
     delimg.iid = img.iid
     delimg.user.uid = useUserStore().user.uid
-    delimg.isrc = img.isrc.replace(global.host,global.original)
+    delimg.isrc = img.isrc.replace(global.host, global.original)
+    console.log(delimg);
+    
     useUserStore().deleteImg(delimg)
 }
-defineProps < {
-    flag:boolean
+const props = defineProps < {
+    flag: boolean,
+    imgs:Img[]
 }>()
+
+const { flag,imgs } = toRefs(props)
 
 </script>
 
 <template>
-                <el-table :data="(useUserStore().user.img[0]!=null)?useUserStore().user.img:null" :border=true style="width: 80%;margin: 0 auto;height: 500px;">
+                <el-table :data="(imgs[0]!=null)?imgs:null" :border=true style="width: 80%;margin: 0 auto;height: 500px;" v-if="imgs">
                 <el-table-column prop="iname" label="图片名" align="center" />
                 <el-table-column prop="pageview" label="浏览量" align="center" />
                 <el-table-column prop="uploaddate" label="上传时间" align="center" />
