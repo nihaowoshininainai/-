@@ -40,4 +40,8 @@ public interface ImgMapper {
     /* 查用户上传 */
     @Select("SELECT * FROM `user` u left join img i on u.uid = i.uid WHERE u.uid = #{uid}")
     public List<Img> getUserImg(Integer uid);
+
+    /*添加图片至喜欢 */
+    @Insert("INSERT INTO ulilke (uid,iid) values(#{uid},#{iid})")
+    public Integer addLike(Integer uid, Integer iid);
 }

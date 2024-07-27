@@ -120,4 +120,14 @@ public class ImgServiceImp implements ImgService {
     public Statues<List<Img>> getUserImg(Integer uid) {
         return new Statues<>(1, "或取成功", imgMapper.getUserImg(uid));
     }
+
+    @Override
+    public Statues<Integer> addLike(Integer uid, Integer iid) {
+        Integer a = imgMapper.addLike(uid, iid);
+        if (a != 1) {
+            return new Statues<>(0, "添加至我喜欢失败", null);
+        }else{
+            return new Statues<>(1,"添加喜欢",null);
+        }
+    }
 }
