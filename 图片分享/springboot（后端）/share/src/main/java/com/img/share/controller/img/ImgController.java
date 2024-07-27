@@ -56,4 +56,9 @@ public class ImgController {
     public Statues<Integer> addLike(@RequestParam("uid") Integer uid, @RequestParam("iid") Integer iid) {
         return imgService.addLike(uid, iid);
     }
+
+    @RequestMapping("/likeOrNot")
+    public Statues<Boolean> likeOrNot(@RequestParam("uid") Integer uid, @RequestParam("iid") Integer iid) {
+        return imgService.likeOrNot(uid, iid);
+    }
 }

@@ -126,8 +126,18 @@ public class ImgServiceImp implements ImgService {
         Integer a = imgMapper.addLike(uid, iid);
         if (a != 1) {
             return new Statues<>(0, "添加至我喜欢失败", null);
-        }else{
-            return new Statues<>(1,"添加喜欢",null);
+        } else {
+            return new Statues<>(1, "添加喜欢", null);
+        }
+    }
+    
+    @Override
+    public Statues<Boolean> likeOrNot(Integer uid, Integer iid) {
+        Integer a = imgMapper.likeOrNot(uid, iid);
+        if (a==0) {
+            return new Statues<>(1, "未在喜欢列表中", false);
+        } else {
+            return new Statues<>(1, "在喜欢列表中", true);
         }
     }
 }

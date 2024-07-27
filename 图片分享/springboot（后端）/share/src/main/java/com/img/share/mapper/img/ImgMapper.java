@@ -44,4 +44,8 @@ public interface ImgMapper {
     /*添加图片至喜欢 */
     @Insert("INSERT INTO ulilke (uid,iid) values(#{uid},#{iid})")
     public Integer addLike(Integer uid, Integer iid);
+
+    /*查图片是否为用户喜欢 */
+    @Select("SELECT COUNT(*) from ulilke u WHERE u.uid = #{uid} and u.iid = #{iid} ")
+    public Integer likeOrNot(Integer uid, Integer iid);
 }

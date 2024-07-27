@@ -23,4 +23,6 @@ public interface ImgService {
     public Statues<List<Img>> getUserImg(Integer uid);
 
     public Statues<Integer> addLike(Integer uid, Integer iid);
+
+    public Statues<Boolean> likeOrNot(Integer uid, Integer iid);
 }
