@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import global from '@/globalVariable/global';
 import { Img } from '@/pojo/Img';
+import router from '@/router';
 import { useImgStore } from '@/stores/img';
 import { useUserStore } from '@/stores/user';
 const delImg = (index: number, img: Img) => {
@@ -11,6 +12,9 @@ const delImg = (index: number, img: Img) => {
     console.log(delimg);
     
     useUserStore().deleteImg(delimg)
+}
+const toImg = (index: number, img: Img)=>{
+    window.open(img.isrc)
 }
 defineProps < {
     flag: boolean,
@@ -29,7 +33,7 @@ defineProps < {
                         <el-button link type="primary" size="small" @click="delImg(scope.$index, scope.row)" v-if="flag">
                             删除
                         </el-button>
-                        <el-button link type="primary" size="small">查看图片</el-button>
+                        <el-button link type="primary" size="small" @click="toImg(scope.$index, scope.row)">查看图片</el-button>
                     </template>
                 </el-table-column>
             </el-table>

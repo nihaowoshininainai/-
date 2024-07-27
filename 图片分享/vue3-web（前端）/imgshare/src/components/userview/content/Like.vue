@@ -2,6 +2,9 @@
 import type { Img } from '@/pojo/Img';
 import { useImgStore } from '@/stores/img';
 import { useUserStore } from '@/stores/user';
+const toImg = (index: number, img: Img)=>{
+    window.open(img.isrc)
+}
 defineProps < {
     flag: boolean,
 }>()
@@ -19,7 +22,7 @@ defineProps < {
                         <el-button link type="primary" size="small" @click="" v-if="flag" >
                             移除
                         </el-button>
-                        <el-button link type="primary" size="small">查看图片</el-button>
+                        <el-button link type="primary" size="small" @click="toImg">查看图片</el-button>
                     </template>
                 </el-table-column>
             </el-table>
