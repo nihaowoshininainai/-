@@ -11,12 +11,10 @@ const delImg = (index: number, img: Img) => {
     
     useUserStore().deleteImg(delimg)
 }
-const props = defineProps < {
+defineProps < {
     flag: boolean,
     imgs:Img[]
 }>()
-
-const { flag,imgs } = toRefs(props)
 
 </script>
 
