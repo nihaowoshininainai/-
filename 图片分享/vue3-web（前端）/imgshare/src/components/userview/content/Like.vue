@@ -2,7 +2,7 @@
 import type { Img } from '@/pojo/Img';
 import { useImgStore } from '@/stores/img';
 import { useUserStore } from '@/stores/user';
-const toImg = (index: number, img: Img)=>{
+const toImg = (index: number, img: Img) => {
     window.open(img.isrc)
 }
 defineProps < {
@@ -18,11 +18,11 @@ defineProps < {
                 <el-table-column prop="uploaddate" label="上传时间" align="center" />
                 <el-table-column prop="isrc" label="图片路径" align="center" />
                 <el-table-column fixed="right" label="操作" align='center'>
-                    <template #default>
+                    <template #default="scope">
                         <el-button link type="primary" size="small" @click="" v-if="flag" >
                             移除
                         </el-button>
-                        <el-button link type="primary" size="small" @click="toImg">查看图片</el-button>
+                        <el-button link type="primary" size="small" @click="toImg(scope.$index, scope.row)">查看图片</el-button>
                     </template>
                 </el-table-column>
             </el-table>
