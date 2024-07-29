@@ -2,35 +2,29 @@
 import type { Commentt } from '@/pojo/Commentt';
 import { Img } from '@/pojo/Img';
 import { useUserStore } from '@/stores/user';
-import axios from 'axios';
-
+import commentApi from '@/api/comment'
 const props = defineProps<{
     img: Img
 }>()
 
 const textarea = ref('')
 const comment = ref<Commentt[]>([])
-const getComment = () => {
-    axios.get(`/getComment?iid=${props.img.iid}`).then((value) => {
-        console.log(value);
-        comment.value = value.data.date.reverse()
-        console.log(comment.value);
 
-    })
+const getComments = () => {
+    commentApi.getComment(props.img).then((value) => {
+    console.log(value);
+    comment.value = value.data.date.reverse()
+})
 }
-onMounted(getComment)
+onMounted(getComments)
 const addComment = () => {
-    axios.post('/addComment', {
-        img: props.img,
-        user: useUserStore().user,
-        content: textarea.value
-    }).then((value) => {
+    commentApi.addComment(props.img,useUserStore().user,textarea.value).then((value) => {
         console.log(value);
         const { code, message, date } = value.data
         if (code === 1) {
             ElMessage.success(message)
             textarea.value = ''
-            getComment()
+            getComments()
         }
 
     })
