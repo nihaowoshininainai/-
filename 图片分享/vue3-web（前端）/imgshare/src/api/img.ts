@@ -22,11 +22,20 @@ const getLikeImg = (uid: number) => {
 const delUserImg = (img: Img) => {
     return request.post('deleteImg',img)
 }
+
+const getImgMessage = (url:string) => {
+    return request.get(url)
+}
+
+const addLike = (url: string) => {
+    return request.get(url)
+}
 export default {
     getImgs: getImgs,
     getCount: getCount,
     getUserImg: getUserImg,
     getLikeImg: getLikeImg,
-    delUserImg: delUserImg
-    
+    delUserImg: delUserImg,
+    getImgMessage: getImgMessage,
+    addLike: addLike
 }

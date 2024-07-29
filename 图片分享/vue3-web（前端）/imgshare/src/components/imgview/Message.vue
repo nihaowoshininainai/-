@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Img } from '@/pojo/Img';
-import axios from 'axios';
+import imgApi from '@/api/img'
 
 const props = defineProps < {
     img:Img
@@ -8,14 +8,14 @@ const props = defineProps < {
 
 const flag = ref(false)
 const url = `/likeOrNot?uid=${props.img.user.uid}&&iid=${props.img.iid}`
-axios.get(url).then((value) => {
+imgApi.getImgMessage(url).then((value) => {
     console.log(value.data.date);
     flag.value = value.data.date
 })
 
 const addLike = () => {
     const url = `/addLike?uid=${props.img.user.uid}&&iid=${props.img.iid}`
-    axios.get(url).then((value) => {
+    imgApi.addLike(url).then((value) => {
         console.log(value)
         const { code, message, date } = value.data
         if (code === 1) {
