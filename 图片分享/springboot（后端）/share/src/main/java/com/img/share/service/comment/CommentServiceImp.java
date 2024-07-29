@@ -24,7 +24,7 @@ public class CommentServiceImp implements CommentService{
     @Override
     public Statues<Integer> addComment(Integer iid,Integer uid,String content) {
         long time = System.currentTimeMillis();
-        Integer a = commentMapper.addComment(iid, new SimpleDateFormat().format(new Date(time)), uid, content);
+        Integer a = commentMapper.addComment(iid, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(time)), uid, content);
         if(a!=1){
             return new Statues<>(0,"添加评论失败",null);
         }
