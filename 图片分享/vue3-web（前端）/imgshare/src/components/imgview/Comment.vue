@@ -40,7 +40,11 @@ const addComment = () => {
     <el-row>
         <el-col v-for="item in comment"><el-card>
                 <template #header>
-                    {{ item.user?.uname }}
+                    <el-link :href="'/uid/'+`${item.user?.uid}`">
+                        <el-text>
+                            {{ item.user?.uname }}
+                        </el-text>
+                    </el-link>
                 </template>
                 {{ item.content }}
                 <template #footer>
