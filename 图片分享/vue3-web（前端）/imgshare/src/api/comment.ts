@@ -5,7 +5,7 @@ import type { Commentt } from "@/pojo/Commentt"
 const getComment = (img: Img) => {
     return request.get(`/getComment?iid=${img.iid}`)
 }
-const addComment = (img:Img,user:User,content:string) => {
+const addComment = (img: Img, user: User, content: string) => {
     return request.post('/addComment', {
         img: img,
         user: user,
@@ -19,9 +19,15 @@ const clickLike = (user: User, comment: Commentt) => {
 const getClickLike = (user: User) => {
     return request.get(`/getClickComments?uid=${user.uid}`)
 }
+
+const delClick = (cid: number, uid: number) => {
+    const url = `/delClick?cid=${cid}&uid=${uid}`
+    return request.get(url)
+}
 export default {
     getComment: getComment,
     addComment: addComment,
     clickLike: clickLike,
-    getClickLike: getClickLike
+    getClickLike: getClickLike,
+    delClick: delClick
 }
