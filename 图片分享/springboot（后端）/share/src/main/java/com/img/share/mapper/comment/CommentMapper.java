@@ -28,4 +28,12 @@ public interface CommentMapper {
     /* 删 */
     @Delete("delete from comment where cid=#{cid}")
     public Integer delComment(Integer cid);
+
+    /*查用户给哪些评论点赞 */
+    @Select("SELECT c.cid FROM clicklike c WHERE uid = #{uid}")
+    public List<Integer> userClickLike(Integer uid);
+
+    /*评论点赞 */
+    @Insert("INSERT INTO clicklike (uid,cid) values(#{uid},#{cid})")
+    public Integer clickLike(Integer uid, Integer iid);
 }

@@ -7,6 +7,12 @@ import com.img.share.pojo.Statues;
 
 public interface CommentService {
     public Statues<List<Comment>> getCommens(Integer iid);
-    public Statues<Integer> addComment(Integer iid,Integer uid,String content);
+
+    public Statues<Integer> addComment(Integer iid, Integer uid, String content);
+
     public Statues<Integer> delComment(Integer cid);
+
+    public Statues<List<Integer>> getClickComments(Integer uid);
+
+    public Statues<Integer> clickLike(Integer uid, Integer cid);
 }

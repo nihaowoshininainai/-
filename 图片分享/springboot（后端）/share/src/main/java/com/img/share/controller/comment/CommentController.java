@@ -26,7 +26,15 @@ public class CommentController {
         return commentService.addComment(comment.getImg().getIid(),comment.getUser().getUid(),comment.getContent());
     }
     @RequestMapping("/delComment")
-    public Statues<Integer> delComment(@RequestBody Comment comment){
+    public Statues<Integer> delComment(@RequestBody Comment comment) {
         return commentService.delComment(comment.getCid());
+    }
+    @RequestMapping("/getClickComments")
+    public Statues<List<Integer>> getClickComments(@RequestParam("uid") Integer uid) {
+        return commentService.getClickComments(uid);
+    }
+    @RequestMapping("/clickLike")
+    public Statues<Integer> clickLike(@RequestParam("uid") Integer uid, @RequestParam("cid") Integer cid) {
+        return commentService.clickLike(uid, cid);
     }
 }
