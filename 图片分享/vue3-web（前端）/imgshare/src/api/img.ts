@@ -30,6 +30,10 @@ const getImgMessage = (url:string) => {
 const addLike = (url: string) => {
     return request.get(url)
 }
+
+const delLike = (url: string) => {
+    return request.get(url)
+}
 export default {
     getImgs: getImgs,
     getCount: getCount,
@@ -37,5 +41,6 @@ export default {
     getLikeImg: getLikeImg,
     delUserImg: delUserImg,
     getImgMessage: getImgMessage,
-    addLike: addLike
+    addLike: addLike,
+    delLike: delLike
 }
