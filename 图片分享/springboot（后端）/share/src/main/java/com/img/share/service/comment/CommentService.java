@@ -15,4 +15,6 @@ public interface CommentService {
     public Statues<List<Integer>> getClickComments(Integer uid);
 
     public Statues<Integer> clickLike(Integer uid, Integer cid);
+
+    public Statues<Integer> delClick(Integer cid, Integer uid);
 }

@@ -36,4 +36,8 @@ public interface CommentMapper {
     /*评论点赞 */
     @Insert("INSERT INTO clicklike (uid,cid) values(#{uid},#{cid})")
     public Integer clickLike(Integer uid, Integer cid);
+
+    /*取消点赞 */
+    @Delete("DELETE FROM clicklike where cid = #{cid} and uid = #{uid}")
+    public Integer delClick(Integer cid, Integer uid);
 }

@@ -37,4 +37,8 @@ public class CommentController {
     public Statues<Integer> clickLike(@RequestParam("uid") Integer uid, @RequestParam("cid") Integer cid) {
         return commentService.clickLike(uid, cid);
     }
+    @RequestMapping("/delClick")
+    public Statues<Integer> delClick(@RequestParam Integer cid, @RequestParam Integer uid) {
+        return commentService.delClick(cid, uid);
+    }
 }

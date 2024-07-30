@@ -58,4 +58,14 @@ public class CommentServiceImp implements CommentService {
             return new Statues<>(1, "点赞成功", null);
         }
     }
+
+    @Override
+    public Statues<Integer> delClick(Integer cid, Integer uid) {
+        Integer a = commentMapper.delClick(cid, uid);
+        if (a != 1) {
+            return new Statues<>(0, "取消失败", null);
+        }else{
+            return new Statues<>(1,"取消点赞",null);
+        }
+    }
 }
