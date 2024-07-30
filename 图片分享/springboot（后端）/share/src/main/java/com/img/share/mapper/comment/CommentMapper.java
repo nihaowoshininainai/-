@@ -35,5 +35,5 @@ public interface CommentMapper {
 
     /*评论点赞 */
     @Insert("INSERT INTO clicklike (uid,cid) values(#{uid},#{cid})")
-    public Integer clickLike(Integer uid, Integer iid);
+    public Integer clickLike(Integer uid, Integer cid);
 }
