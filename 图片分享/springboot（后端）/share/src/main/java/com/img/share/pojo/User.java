@@ -16,4 +16,5 @@ public class User {
     private List<Img> img;
     private List<Comment> comment;
     private List<Img> likeImgs;
+    private List<Comment> clickComments;
 }
