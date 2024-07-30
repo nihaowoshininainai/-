@@ -7,15 +7,13 @@ const props = defineProps < {
 }>()
 
 const flag = ref(false)
-const url = `/likeOrNot?uid=${props.img.user.uid}&&iid=${props.img.iid}`
-imgApi.getImgMessage(url).then((value) => {
+imgApi.getImgMessage(props.img).then((value) => {
     console.log(value.data.date);
     flag.value = value.data.date
 })
 
 const addLike = () => {
-    const url = `/addLike?uid=${props.img.user.uid}&&iid=${props.img.iid}`
-    imgApi.addLike(url).then((value) => {
+    imgApi.addLike(props.img).then((value) => {
         console.log(value)
         const { code, message, date } = value.data
         if (code === 1) {
@@ -26,8 +24,7 @@ const addLike = () => {
 }
 
 const delLike = () => {
-    const url = `/delLike?uid=${props.img.user.uid}&iid=${props.img.iid}`
-    imgApi.delLike(url).then((value) => {
+    imgApi.delLike(props.img).then((value) => {
         const { code, message, date } = value.data
         if (code === 1) {
             ElMessage.success(message)
