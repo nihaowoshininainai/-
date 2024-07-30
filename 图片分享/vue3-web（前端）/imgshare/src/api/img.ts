@@ -1,5 +1,6 @@
 import type { Img } from "@/pojo/Img"
 import { request } from "./request"
+import { useUserStore } from "@/stores/user"
 
 const getImgs = async (order: string, count: number, page: number) => {
 
@@ -24,12 +25,12 @@ const delUserImg = (img: Img) => {
 }
 
 const getImgMessage = (img: Img) => {
-    const url = `/likeOrNot?uid=${img.user.uid}&&iid=${img.iid}`
+    const url = `/likeOrNot?uid=${useUserStore().user.uid}&&iid=${img.iid}`
     return request.get(url)
 }
 
 const addLike = (img: Img) => {
-    const url = `/addLike?uid=${img.user.uid}&&iid=${img.iid}`
+    const url = `/addLike?uid=${useUserStore().user.uid}&&iid=${img.iid}`
     return request.get(url)
 }
 

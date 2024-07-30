@@ -17,7 +17,7 @@ const user = useUserStore().user
             <router-link to="/home"><el-link :underline="false">首页</el-link></router-link>
         </el-col>
         <el-col :span="4" v-if="user.uid == -1">
-            <router-link to="login"><el-link :underline="false">登陆</el-link></router-link>
+            <router-link to="/login"><el-link :underline="false">登陆</el-link></router-link>
         </el-col>
         <el-col :span="4" v-if="user.uid == -1">
             <router-link to="/register"><el-link :underline="false">注册</el-link></router-link>
