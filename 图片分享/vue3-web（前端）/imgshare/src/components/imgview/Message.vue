@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Img } from '@/pojo/Img';
 import imgApi from '@/api/img'
+import { useUserStore } from '@/stores/user';
 
 const props = defineProps < {
     img:Img
@@ -23,14 +24,9 @@ const addLike = () => {
     })
 }
 
-const delLike = () => {
-    imgApi.delLike(props.img).then((value) => {
-        const { code, message, date } = value.data
-        if (code === 1) {
-            ElMessage.success(message)
-            flag.value = false
-        }
-    })
+const delLike = async () => {
+    useUserStore().delLike(props.img.iid)
+    flag.value = false
 }
 
 </script>

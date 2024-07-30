@@ -5,8 +5,12 @@ import { useUserStore } from '@/stores/user';
 const toImg = (index: number, img: Img) => {
     window.open(img.isrc)
 }
-defineProps < {
+const delLike = (index:number,img:Img) => {
+    useUserStore().delLike(img.iid)
+}
+const props = defineProps < {
     flag: boolean,
+    uid:number
 }>()
 </script>
 
@@ -19,7 +23,7 @@ defineProps < {
                 <el-table-column prop="isrc" label="图片路径" align="center" />
                 <el-table-column fixed="right" label="操作" align='center'>
                     <template #default="scope">
-                        <el-button link type="primary" size="small" @click="" v-if="flag" >
+                        <el-button link type="primary" size="small" @click="delLike(scope.$index, scope.row)" v-if="flag" >
                             移除
                         </el-button>
                         <el-button link type="primary" size="small" @click="toImg(scope.$index, scope.row)">查看图片</el-button>

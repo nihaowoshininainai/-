@@ -48,13 +48,24 @@ export const useUserStore = defineStore('user', () => {
         console.log(message);
         
     }
+    async function delLike(iid: number) {
+        imgApi.delLike(user.value.uid, iid).then((value) => {
+            const { code, message, date } = value.data
+            if (code === 1) {
+                ElMessage.success(message)
+                getLikeImg()
+            }
+        })
+        
+    }    
     return {
         login,
         user,
         register,
         getImgs,
         getLikeImg,
-        deleteImg
+        deleteImg,
+        delLike
     }
 
 }, {

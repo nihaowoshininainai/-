@@ -51,7 +51,7 @@ const change = (e: any) => {
             <My :flag="flag"></My>
         </el-col>
         <el-col v-if="'喜欢的作品' === content">
-            <Like :flag="flag"></Like>
+            <Like :flag="flag" :uid="uid"></Like>
         </el-col>
         <el-col v-if="'上传' === content" style="margin-top: 40px;">
             <Upload></Upload>

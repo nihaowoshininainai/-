@@ -33,8 +33,8 @@ const addLike = (img: Img) => {
     return request.get(url)
 }
 
-const delLike = (img: Img) => {
-    const url = `/delLike?uid=${img.user.uid}&iid=${img.iid}`
+const delLike = (uid: number, iid: number) => {
+    const url = `/delLike?uid=${uid}&iid=${iid}`
     return request.get(url)
 }
 export default {
