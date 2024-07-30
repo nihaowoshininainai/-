@@ -38,6 +38,7 @@ const addComment = () => {
     </el-row>
     <el-divider />
     <el-row>
+        <el-empty v-if="comment.length===0" description="无评论" style="margin: 0 auto;"></el-empty>
         <el-col v-for="item in comment"><el-card>
                 <template #header>
                     <el-link :href="'/uid/'+`${item.user?.uid}`">
