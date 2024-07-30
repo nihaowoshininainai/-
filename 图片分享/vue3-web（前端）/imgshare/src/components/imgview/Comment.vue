@@ -69,7 +69,7 @@ const clicklike = (user: User, comment: Commentt) => {
                         </el-text>
                     </el-link>
                 </template>
-                {{ item.content }}
+                <div v-html="item.content"></div>
                 <template #footer>
                     <el-row>
                         <el-col :span="20">{{ item.commdate }}</el-col>
@@ -105,6 +105,6 @@ const clicklike = (user: User, comment: Commentt) => {
 .el-card {
     word-wrap: break-word;
     overflow-wrap: break-word;
-    white-space: normal;
+    white-space:  pre-line;
 }
 </style>

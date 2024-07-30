@@ -21,6 +21,7 @@ declare module 'vue' {
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElHeader: typeof import('element-plus/es')['ElHeader']
+    ElHtml: typeof import('element-plus/es')['ElHtml']
     ElIm: typeof import('element-plus/es')['ElIm']
     ElImag: typeof import('element-plus/es')['ElImag']
     ElImage: typeof import('element-plus/es')['ElImage']
