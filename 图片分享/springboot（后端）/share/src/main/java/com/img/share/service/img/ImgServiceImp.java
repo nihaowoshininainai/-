@@ -87,7 +87,7 @@ public class ImgServiceImp implements ImgService {
     }
 
     @Override
-    public Statues<Integer> delete(Integer iid, Integer uid,String path) {
+    public Statues<Integer> delete(Integer iid, Integer uid, String path) {
         DelImg delImg = new DelImg(path);
         delImg.start();
         Integer a = imgMapper.delete(iid, uid);
@@ -130,14 +130,24 @@ public class ImgServiceImp implements ImgService {
             return new Statues<>(1, "添加喜欢", null);
         }
     }
-    
+
     @Override
     public Statues<Boolean> likeOrNot(Integer uid, Integer iid) {
         Integer a = imgMapper.likeOrNot(uid, iid);
-        if (a==0) {
+        if (a == 0) {
             return new Statues<>(1, "未在喜欢列表中", false);
         } else {
             return new Statues<>(1, "在喜欢列表中", true);
+        }
+    }
+
+    @Override
+    public Statues<Integer> delLike(Integer uid, Integer iid) {
+        Integer a = imgMapper.delLike(uid, iid);
+        if (a != 1) {
+            return new Statues<>(0, "移除喜欢失败", null);
+        } else {
+            return new Statues<>(1, "从喜欢列表中移除", null);
         }
     }
 }

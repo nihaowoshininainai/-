@@ -61,4 +61,9 @@ public class ImgController {
     public Statues<Boolean> likeOrNot(@RequestParam("uid") Integer uid, @RequestParam("iid") Integer iid) {
         return imgService.likeOrNot(uid, iid);
     }
+
+    @RequestMapping("/delLike")
+    public Statues<Integer> delLike(@RequestParam Integer uid, @RequestParam Integer iid) {
+        return imgService.delLike(uid, iid);
+    }
 }

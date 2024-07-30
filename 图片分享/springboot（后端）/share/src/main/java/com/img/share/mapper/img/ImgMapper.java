@@ -48,4 +48,7 @@ public interface ImgMapper {
     /*查图片是否为用户喜欢 */
     @Select("SELECT COUNT(*) from ulilke u WHERE u.uid = #{uid} and u.iid = #{iid} ")
     public Integer likeOrNot(Integer uid, Integer iid);
+    
+    @Delete("DELETE FROM ulilke WHERE uid = #{uid} and iid = #{iid}")
+    public Integer delLike(Integer uid, Integer iid);
 }
