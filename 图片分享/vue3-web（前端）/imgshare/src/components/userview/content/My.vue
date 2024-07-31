@@ -23,7 +23,7 @@ defineProps < {
 </script>
 
 <template>
-                <el-table :data="(flag)?useUserStore().user.img:useImgStore().userImgs" :border=true style="width: 80%;margin: 0 auto;height: 500px;">
+                <el-table :data="((flag)?useUserStore().user.img:useImgStore().userImgs)[0]!=null?(flag)?useUserStore().user.img:useImgStore().userImgs:null" :border=true style="width: 80%;margin: 0 auto;height: 500px;">
                 <el-table-column prop="iname" label="图片名" align="center" />
                 <el-table-column prop="pageview" label="浏览量" align="center" />
                 <el-table-column prop="uploaddate" label="上传时间" align="center" />

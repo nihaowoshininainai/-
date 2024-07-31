@@ -27,7 +27,7 @@ export const useUserStore = defineStore('user', () => {
         user.value.img.reverse()
         if (user.value.img[0]!=null)
             user.value.img.forEach(element => {
-                element.isrc = global.host+element.isrc.substring(element.isrc.indexOf('/img')+4)
+                element.isrc = element.isrc.replace(global.original,global.host)
             })
     }
     async function getLikeImg() {
@@ -35,7 +35,7 @@ export const useUserStore = defineStore('user', () => {
         console.log(user.value.likeImgs);
         user.value.likeImgs.reverse()
         user.value.likeImgs.forEach(element => {
-            element.isrc = global.host+element.isrc.substring(element.isrc.indexOf('/img')+4)
+            element.isrc = element.isrc.replace(global.original,global.host)
         })
         
     }

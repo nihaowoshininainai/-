@@ -10,7 +10,7 @@ const img = ref({
 })
 
 const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawfile) => {
-    if (rawfile.type != 'image/jpg' && rawfile.type != 'image/png') {
+    if (rawfile.type != 'image/jpeg' && rawfile.type != 'image/png') {
         ElMessage.error("只允许jpg或png格式的图片")
         return false
     }
