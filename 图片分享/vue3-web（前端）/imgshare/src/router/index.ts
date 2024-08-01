@@ -15,8 +15,13 @@ const router = createRouter({
       children: [
         {
           path: 'home',
+          redirect: 'home/uploaddate'
+        },
+        {
+          path: 'home/:order',
           name: 'home',
-          component: HomeView
+          component: HomeView,
+          props: true
         },
         {
           path: 'login',
@@ -39,7 +44,7 @@ const router = createRouter({
           component: ImgView
         },
         {
-          path: 'search/:iname',
+          path: 'search/:iname/:order',
           name: 'search',
           component: Search,
           props:true

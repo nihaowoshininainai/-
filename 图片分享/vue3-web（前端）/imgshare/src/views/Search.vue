@@ -2,17 +2,17 @@
 import imgApi from '@/api/img'
 import global from '@/globalVariable/global';
 import { Img } from '@/pojo/Img';
+import router from '@/router';
 
 const props = defineProps<{
-    iname: string
+    iname: string,
+    order:string
 }>()
 
-watch(props, (value, oldvalue) => {
+watch(props, () => {
     getCount()
     getSearch()
 })
-
-const order = ref('uploaddate')
 
 const count = ref(0)
 
@@ -42,7 +42,7 @@ const getCount = async () => {
 }
 
 const getSearch = async () => {
-    const { code, message, date } = (await imgApi.getSearch(order.value, pageSize.value, page.value, props.iname)).data
+    const { code, message, date } = (await imgApi.getSearch(props.order, pageSize.value, page.value, props.iname)).data
     imgs.value = date
     console.log(imgs.value)
     imgs.value.forEach(element => {
@@ -58,10 +58,9 @@ onMounted(() => {
 const changeOrder = (e: any) => {
     console.log(e.target.innerText);
     if (e.target.innerText === '按日期')
-        order.value = 'uploaddate'
+        router.push(`/search/${props.iname}/uploaddate`)
     else
-        order.value = 'pageview'
-    getSearch()
+        router.push(`/search/${props.iname}/pageview`)
 }
 
 const changePage = () => {

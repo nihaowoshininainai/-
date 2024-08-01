@@ -1,9 +1,17 @@
 <script setup lang="ts">
 import ImgApi from '@/api/img'
 import ShowImg from '@/components/ShowImg.vue';
+import router from '@/router';
 import { useImgStore } from '@/stores/img';
 
-const order = ref('uploaddate')
+const props = defineProps < {
+    order:string
+}>()
+
+watch(props, () => {
+    getCount()
+    useImgStore().getImgs(props.order, pageSize.value, page.value)
+})
 
 const count = ref(0)
 
@@ -32,22 +40,21 @@ const getCount = async () => {
 
 onBeforeMount(() => {
     getCount()
-    useImgStore().getImgs(order.value, pageSize.value, page.value)
+    useImgStore().getImgs(props.order, pageSize.value, page.value)
 })
 
 const changeOrder = (e: any) => {
     console.log(e.target.innerText);
     if (e.target.innerText === '按日期')
-        order.value = 'uploaddate'
+        router.push('/home/uploaddate')
     else
-        order.value = 'pageview'
-    useImgStore().getImgs(order.value, pageSize.value, page.value)
+        router.push('/home/pageview')
 }
 
 console.log(page.value);
 
 const changePage = () => {
-    useImgStore().getImgs(order.value, pageSize.value, page.value)
+    useImgStore().getImgs(props.order, pageSize.value, page.value)
 }
 
 </script>
