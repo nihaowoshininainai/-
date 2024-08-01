@@ -2,7 +2,7 @@ import type { User } from "@/pojo/User"
 import { request } from "./request";
 import router from "@/router";
 
-const login = (user:User) => {
+const login = (user: User) => {
     request.post('login', user).then((res) => {
 
         const data = res.data;
@@ -34,12 +34,12 @@ const register = (user: User) => {
             console.log(user);
             router.push('/home')
         }
-        
+
     })
 }
 export default {
     userLoginApi: login,
     userRegisterApi: register
 
-    
+
 }

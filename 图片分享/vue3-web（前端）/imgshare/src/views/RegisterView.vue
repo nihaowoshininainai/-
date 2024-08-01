@@ -7,7 +7,7 @@ const registerFormRef = ref<FormInstance>()
 const registerForm = reactive({
     uname: '',
     pwd: '',
-    checkPwd:''
+    checkPwd: ''
 })
 const checkUname = (rule: any, value: any, callback: any) => {
     if (value === '')
@@ -18,10 +18,10 @@ const checkUname = (rule: any, value: any, callback: any) => {
             callback()
         else
             callback(new Error('只允许数字，字母，中文，下划线，减号'))
-    
+
     }
 }
-const checkPwd = (rule: any, value: any, callback: any)=>{
+const checkPwd = (rule: any, value: any, callback: any) => {
     if (value === '')
         callback(new Error('请输入密码'))
     else {
@@ -40,13 +40,13 @@ const checkPwd2 = (rule: any, value: any, callback: any) => {
             callback(new Error('两次密码不一致'))
         else
             callback()
-    
+
     }
 }
 const rules = reactive<FormRules<typeof registerForm>>({
     uname: [{ validator: checkUname, trigger: 'blur' }],
     pwd: [{ validator: checkPwd, trigger: 'blur' }],
-    checkPwd: [{ validator: checkPwd2, trigger: 'blur' }] 
+    checkPwd: [{ validator: checkPwd2, trigger: 'blur' }]
 })
 
 const submitForm = (formEl: FormInstance | undefined) => {
@@ -57,7 +57,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
             registerForm.uname = ''
             registerForm.pwd = ''
             registerForm.checkPwd = ''
-                
+
         }
         else {
             console.log('提交失败')
@@ -74,13 +74,15 @@ const submitForm = (formEl: FormInstance | undefined) => {
                     <el-input v-model="registerForm.uname" />
                 </el-form-item>
                 <el-form-item label="密码" prop="pwd">
-                    <el-input v-model="registerForm.pwd" type="password"  />
+                    <el-input v-model="registerForm.pwd" type="password" />
                 </el-form-item>
                 <el-form-item label="确认密码" prop="checkPwd">
-                    <el-input v-model="registerForm.checkPwd" type="password" @keydown.enter="submitForm(registerFormRef)" />
+                    <el-input v-model="registerForm.checkPwd" type="password"
+                        @keydown.enter="submitForm(registerFormRef)" />
                 </el-form-item>
                 <el-form-item>
-                    <el-button @click="submitForm(registerFormRef)" type="primary" style="margin: 0 auto;">注册</el-button>
+                    <el-button @click="submitForm(registerFormRef)" type="primary"
+                        style="margin: 0 auto;">注册</el-button>
                 </el-form-item>
                 <router-link to="/login"><el-link type="primary"
                         style="margin-left: 2rem;">已有账号？点我点我</el-link></router-link>

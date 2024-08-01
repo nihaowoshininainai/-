@@ -25,9 +25,9 @@ export const useUserStore = defineStore('user', () => {
         user.value.img = (await imgApi.getUserImg(user.value.uid)).data.date
         console.log(user.value.img);
         user.value.img.reverse()
-        if (user.value.img[0]!=null)
+        if (user.value.img[0] != null)
             user.value.img.forEach(element => {
-                element.isrc = element.isrc.replace(global.original,global.host)
+                element.isrc = element.isrc.replace(global.original, global.host)
             })
     }
     async function getLikeImg() {
@@ -35,18 +35,18 @@ export const useUserStore = defineStore('user', () => {
         console.log(user.value.likeImgs);
         user.value.likeImgs.reverse()
         user.value.likeImgs.forEach(element => {
-            element.isrc = element.isrc.replace(global.original,global.host)
+            element.isrc = element.isrc.replace(global.original, global.host)
         })
-        
+
     }
-    async function deleteImg(img:Img) {
+    async function deleteImg(img: Img) {
         const { code, message, date } = (await imgApi.delUserImg(img)).data
         if (code === 1) {
             ElMessage.success(message)
             location.reload()
         }
         console.log(message);
-        
+
     }
     async function delLike(iid: number) {
         imgApi.delLike(user.value.uid, iid).then((value) => {
@@ -56,8 +56,8 @@ export const useUserStore = defineStore('user', () => {
                 getLikeImg()
             }
         })
-        
-    }    
+
+    }
     return {
         login,
         user,

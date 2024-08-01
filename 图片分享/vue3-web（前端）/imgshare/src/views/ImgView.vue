@@ -11,7 +11,7 @@ console.log(iid);
 const img = ref<Img>(new Img())
 useImgStore().imgs.forEach((element) => {
     console.log(iid);
-    
+
     if (Number(iid) === element.iid)
         img.value = element
 })
@@ -25,7 +25,7 @@ imgApi.addPageView(Number(iid));
             <el-image :src="img.isrc" fit="scale-down" />
         </el-col>
         <el-col>
-           <Message :img="img"></Message> 
+            <Message :img="img"></Message>
         </el-col>
         <el-col>
             <Comment :img="img"></Comment>
@@ -37,8 +37,10 @@ imgApi.addPageView(Number(iid));
 .content {
     width: 50%;
     margin: 0 auto;
+
     .img {
         background-color: gainsboro;
+
         .el-image {
             width: 100%;
             height: 30rem;

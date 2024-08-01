@@ -14,7 +14,7 @@ if (flag.value) {
     useUserStore().getImgs()
 }
 else {
-    useImgStore().getUserImgs(uid) 
+    useImgStore().getUserImgs(uid)
 }
 
 const change = (e: any) => {
@@ -24,7 +24,7 @@ const change = (e: any) => {
         if (flag.value) {
             useUserStore().getImgs()
         } else {
-            useImgStore().getUserImgs(uid) 
+            useImgStore().getUserImgs(uid)
         }
     }
     else if ('喜欢的作品' === content.value) {

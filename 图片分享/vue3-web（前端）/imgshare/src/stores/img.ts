@@ -12,7 +12,7 @@ export const useImgStore = defineStore('img', () => {
         console.log(imgs.value);
 
         imgs.value.forEach(element => {
-            element.isrc = element.isrc.replace(global.original,global.host)
+            element.isrc = element.isrc.replace(global.original, global.host)
         });
     }
     async function getUserImgs(uid: number) {
@@ -20,7 +20,7 @@ export const useImgStore = defineStore('img', () => {
         userImgs.value.reverse()
         if (userImgs.value[0] != null)
             userImgs.value.forEach(element => {
-                element.isrc = element.isrc.replace(global.original,global.host)
+                element.isrc = element.isrc.replace(global.original, global.host)
             })
 
         console.log(userImgs.value);
@@ -31,7 +31,7 @@ export const useImgStore = defineStore('img', () => {
         likeImgs.value.reverse()
         if (likeImgs.value[0] != null)
             likeImgs.value.forEach(element => {
-                element.isrc = element.isrc.replace(global.original,global.host)
+                element.isrc = element.isrc.replace(global.original, global.host)
             })
         console.log(likeImgs.value);
     }

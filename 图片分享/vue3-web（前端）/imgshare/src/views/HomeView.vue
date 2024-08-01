@@ -26,13 +26,13 @@ const getCount = async () => {
     const { code, message, date } = (await ImgApi.getCount()).data
     count.value = date
     console.log(count.value);
-    
-    
+
+
 }
 
 onBeforeMount(() => {
     getCount()
-    useImgStore().getImgs(order.value,pageSize.value,page.value)
+    useImgStore().getImgs(order.value, pageSize.value, page.value)
 })
 
 const changeOrder = (e: any) => {
@@ -41,37 +41,39 @@ const changeOrder = (e: any) => {
         order.value = 'uploaddate'
     else
         order.value = 'pageview'
-    useImgStore().getImgs(order.value,pageSize.value,page.value)
+    useImgStore().getImgs(order.value, pageSize.value, page.value)
 }
 
 console.log(page.value);
 
 const changePage = () => {
-    useImgStore().getImgs(order.value,pageSize.value,page.value)
+    useImgStore().getImgs(order.value, pageSize.value, page.value)
 }
 
 </script>
 <template>
     <el-row style="text-align: center;">
-            <el-col :span="span">
-                <el-link @click="changeOrder">按日期</el-link>
-            </el-col>
-            <el-col :span="span">
-                <el-link @click="changeOrder">按热度</el-link>
-            </el-col>
-        </el-row>
+        <el-col :span="span">
+            <el-link @click="changeOrder">按日期</el-link>
+        </el-col>
+        <el-col :span="span">
+            <el-link @click="changeOrder">按热度</el-link>
+        </el-col>
+    </el-row>
     <ShowImg :img="useImgStore().imgs" :span="span"></ShowImg>
-    <el-pagination background layout="prev, pager, next" :total="count" :page-size="pageSize" v-model:current-page="page"  @current-change="changePage" />
+    <el-pagination background layout="prev, pager, next" :total="count" :page-size="pageSize"
+        v-model:current-page="page" @current-change="changePage" />
 </template>
 
 <style lang="less" scoped>
-    .el-pagination{
-        margin-top: 5rem;
-        justify-content: center;
+.el-pagination {
+    margin-top: 5rem;
+    justify-content: center;
+}
+
+@media screen and (max-width:1300px) {
+    .content {
+        width: 90%;
     }
-    @media screen and (max-width:1300px) {
-        .content{
-            width: 90%;
-        }
-    }
+}
 </style>

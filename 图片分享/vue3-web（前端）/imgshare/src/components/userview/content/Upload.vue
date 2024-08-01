@@ -18,10 +18,10 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawfile) => {
 }
 
 const handleExceed: UploadProps['onExceed'] = (files) => {
-  uploadRef.value!.clearFiles()
-  const file = files[0] as UploadRawFile
-  file.uid = genFileId()
-  uploadRef.value!.handleStart(file)
+    uploadRef.value!.clearFiles()
+    const file = files[0] as UploadRawFile
+    file.uid = genFileId()
+    uploadRef.value!.handleStart(file)
 }
 
 const submitUpload = () => {
@@ -39,26 +39,22 @@ const upError = () => {
 </script>
 <template>
     <span>图片名：</span>
-            <el-input v-model="img.iname" style="width: 20%;"></el-input>
-            <el-upload ref="uploadRef" class="upload-demo" action="/api/addImg" :auto-upload="false" :data="img" style="width: 50%;
-                margin: 40px auto;" list-type="picture"
-                :on-error="upError"
-                :on-success="success"
-                :before-upload="beforeAvatarUpload"
-                :limit="1"
-                :on-exceed="handleExceed">
-                <template #trigger>
-                    <el-button type="primary">选择图片</el-button>
-                </template>
+    <el-input v-model="img.iname" style="width: 20%;"></el-input>
+    <el-upload ref="uploadRef" class="upload-demo" action="/api/addImg" :auto-upload="false" :data="img" style="width: 50%;
+                margin: 40px auto;" list-type="picture" :on-error="upError" :on-success="success"
+        :before-upload="beforeAvatarUpload" :limit="1" :on-exceed="handleExceed">
+        <template #trigger>
+            <el-button type="primary">选择图片</el-button>
+        </template>
 
-                <el-button class="ml-3" type="success" @click="submitUpload" :disabled="img.iname === ''">
-                    上传
-                </el-button>
+        <el-button class="ml-3" type="success" @click="submitUpload" :disabled="img.iname === ''">
+            上传
+        </el-button>
 
-                <template #tip>
-                    <div class="el-upload__tip">
-                        只支持jpg与png格式
-                    </div>
-                </template>
-            </el-upload>
+        <template #tip>
+            <div class="el-upload__tip">
+                只支持jpg与png格式
+            </div>
+        </template>
+    </el-upload>
 </template>

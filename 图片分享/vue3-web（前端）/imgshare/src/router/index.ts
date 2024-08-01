@@ -35,7 +35,7 @@ const router = createRouter({
         {
           path: 'img/:iid',
           name: 'img',
-          component:ImgView
+          component: ImgView
         }
       ]
     }

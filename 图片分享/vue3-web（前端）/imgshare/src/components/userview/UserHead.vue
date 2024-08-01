@@ -10,7 +10,7 @@ const user = ref<User>(new User())
 if (!flag) {
     useImgStore().imgs.forEach((element) => {
         if (element.user.uid === Number(uid))
-        user.value = element.user
+            user.value = element.user
     })
 }
 </script>
@@ -27,14 +27,15 @@ if (!flag) {
 </template>
 
 <style lang="less" scoped>
-    .el-row{
-        background-image: url(http://47.98.148.6:8094/%E9%81%BA%E5%85%89%E3%81%AE%E5%91%BC%E3%81%B3%E5%A3%B0-92968709.png);
-        background-position: center center;
-        .el-col{
-            h1{
-                text-align: center;
-                line-height: 20rem;
-            }
+.el-row {
+    background-image: url(http://47.98.148.6:8094/%E9%81%BA%E5%85%89%E3%81%AE%E5%91%BC%E3%81%B3%E5%A3%B0-92968709.png);
+    background-position: center center;
+
+    .el-col {
+        h1 {
+            text-align: center;
+            line-height: 20rem;
         }
     }
+}
 </style>
