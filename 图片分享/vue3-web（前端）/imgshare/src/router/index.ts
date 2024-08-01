@@ -4,6 +4,7 @@ import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import UserView from '@/views/UserView.vue'
 import ImgView from '@/views/ImgView.vue'
+import Search from '@/views/Search.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -36,6 +37,11 @@ const router = createRouter({
           path: 'img/:iid',
           name: 'img',
           component: ImgView
+        },
+        {
+          path: 'search/:iname',
+          name: 'search',
+          component: Search
         }
       ]
     }

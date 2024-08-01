@@ -41,6 +41,10 @@ const addPageView = (iid: number) => {
     const url = `/addPageView?iid=${iid}`
     return request.get(url)
 }
+
+const getSearch = async (order: string, count: number, page: number, iname: string) => {
+    return request.get(`/search?order=${order} &count=${count} &page=${page} &iname=${iname}`)
+}
 export default {
     getImgs: getImgs,
     getCount: getCount,
@@ -50,5 +54,6 @@ export default {
     getImgMessage: getImgMessage,
     addLike: addLike,
     delLike: delLike,
-    addPageView: addPageView
+    addPageView: addPageView,
+    getSearch: getSearch
 }
