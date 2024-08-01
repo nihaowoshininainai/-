@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ImgApi from '@/api/img'
+import ShowImg from '@/components/ShowImg.vue';
 import { useImgStore } from '@/stores/img';
 
 const order = ref('uploaddate')
@@ -59,33 +60,11 @@ const changePage = () => {
                 <el-link @click="changeOrder">按热度</el-link>
             </el-col>
         </el-row>
-    <div class="content">
-        <el-row :gutter="20">
-        <el-col v-for="item in useImgStore().imgs" :span="span">
-            <router-link :to="`/img/${item.iid}`"><el-col :style="`background-image: url(${item.isrc}!300x300);`"></el-col></router-link>
-        </el-col>
-    </el-row>
-    </div>
+    <ShowImg :img="useImgStore().imgs" :span="span"></ShowImg>
     <el-pagination background layout="prev, pager, next" :total="count" :page-size="pageSize" v-model:current-page="page"  @current-change="changePage" />
 </template>
 
 <style lang="less" scoped>
-    .content{
-        width: 70%;
-        margin: 40px auto;
-        .el-row{
-        .el-col{
-            overflow: hidden;
-            .el-col {
-                background-size: cover;
-                background-position: center ;
-                padding-top: 100%;
-                margin:10px auto;
-                border-radius: 10px;
-            }
-        }
-    }
-    }
     .el-pagination{
         margin-top: 5rem;
         justify-content: center;

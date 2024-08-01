@@ -37,6 +37,7 @@ declare module 'vue' {
     My: typeof import('./src/components/userview/content/My.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ShowImg: typeof import('./src/components/ShowImg.vue')['default']
     Upload: typeof import('./src/components/userview/content/Upload.vue')['default']
     UserContent: typeof import('./src/components/userview/UserContent.vue')['default']
     UserHead: typeof import('./src/components/userview/UserHead.vue')['default']
