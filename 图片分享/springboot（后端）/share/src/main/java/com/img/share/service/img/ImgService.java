@@ -14,7 +14,7 @@ public interface ImgService {
 
     public Statues<Integer> delete(Integer iid, Integer uid,String path);
 
-    public Statues<List<Img>> search(String order, Integer page, Integer count);
+    public Statues<List<Img>> search(String order, Integer page, Integer count,String iname);
 
     public Statues<Integer> getCount();
 

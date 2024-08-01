@@ -27,12 +27,12 @@ public interface ImgMapper {
     public Integer getCount();
 
     /* 分页查 */
-    @Select("select i.iid,i.iname,i.isrc,i.uploaddate,i.pageview,u.uid,u.uname from img i left join `user` u on i.uid = u.uid order by ${order} desc limit #{start},#{count}")
+    @Select("select i.iid,i.iname,i.isrc,i.uploaddate,i.pageview,u.uid,u.uname from img i left join `user` u on i.uid = u.uid WHERE iname LIKE CONCAT('%',#{iname},'%') order by ${order} desc limit #{start},#{count}")
     @Results({
             @Result(property = "user.uid", column = "uid"),
             @Result(property = "user.uname", column = "uname")
     })
-    public List<Img> search(String order, Integer start, Integer count);
+    public List<Img> search(String order, Integer start, Integer count,String iname);
 
     /* 查用户喜欢 */
     @Select("SELECT u.uid,u.iid,i.iname,i.isrc,i.uploaddate,i.pageview FROM ulilke u left join img i on u.iid = i.iid where u.uid = #{uid}")

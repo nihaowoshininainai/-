@@ -33,8 +33,8 @@ public class ImgController {
 
     @RequestMapping("/search")
     public Statues<List<Img>> search(@RequestParam("order") String order, @RequestParam("count") Integer count,
-            @RequestParam("page") Integer page) {
-        return imgService.search(order, page, count);
+            @RequestParam("page") Integer page,@RequestParam String iname) {
+        return imgService.search(order, page, count,iname);
     }
 
     @RequestMapping("/getCount")

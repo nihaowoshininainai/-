@@ -100,10 +100,9 @@ public class ImgServiceImp implements ImgService {
     }
 
     @Override
-    public Statues<List<Img>> search(String order, Integer page, Integer count) {
+    public Statues<List<Img>> search(String order, Integer page, Integer count,String iname) {
         String message = "这是第" + page + "页";
-        System.out.println(imgMapper.search(order, (page - 1) * count, count));
-        return new Statues<>(1, message, imgMapper.search(order, (page - 1) * count, count));
+        return new Statues<>(1, message, imgMapper.search(order, (page - 1) * count, count,iname));
     }
 
     @Override
