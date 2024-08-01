@@ -15,7 +15,7 @@ const router = createRouter({
       children: [
         {
           path: 'home',
-          redirect: 'home/uploaddate'
+          redirect: '/home/uploaddate'
         },
         {
           path: 'home/:order',
