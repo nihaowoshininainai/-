@@ -36,6 +36,11 @@ const delLike = (uid: number, iid: number) => {
     const url = `/delLike?uid=${uid}&iid=${iid}`
     return request.get(url)
 }
+
+const addPageView = (iid: number) => {
+    const url = `/addPageView?iid=${iid}`
+    return request.get(url)
+}
 export default {
     getImgs: getImgs,
     getCount: getCount,
@@ -44,5 +49,6 @@ export default {
     delUserImg: delUserImg,
     getImgMessage: getImgMessage,
     addLike: addLike,
-    delLike: delLike
+    delLike: delLike,
+    addPageView: addPageView
 }
