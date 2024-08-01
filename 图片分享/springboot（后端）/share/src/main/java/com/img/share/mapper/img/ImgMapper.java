@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.img.share.pojo.Img;
 
@@ -51,4 +52,7 @@ public interface ImgMapper {
     
     @Delete("DELETE FROM ulilke WHERE uid = #{uid} and iid = #{iid}")
     public Integer delLike(Integer uid, Integer iid);
+
+    @Update("UPDATE img SET pageview = pageview + 1 WHERE iid = #{iid}")
+    public Integer addPageView(Integer iid);
 }

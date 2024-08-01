@@ -27,4 +27,6 @@ public interface ImgService {
     public Statues<Boolean> likeOrNot(Integer uid, Integer iid);
 
     public Statues<Integer> delLike(Integer uid, Integer iid);
+
+    public Statues<Integer> addPageView(Integer iid);
 }

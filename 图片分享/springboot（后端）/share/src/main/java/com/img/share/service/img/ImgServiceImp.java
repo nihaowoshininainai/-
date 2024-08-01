@@ -150,4 +150,14 @@ public class ImgServiceImp implements ImgService {
             return new Statues<>(1, "从喜欢列表中移除", null);
         }
     }
+
+    @Override
+    public Statues<Integer> addPageView(Integer iid) {
+        Integer a = imgMapper.addPageView(iid);
+        if (a != 1) {
+            return new Statues<>(0, "添加浏览量失败", null);
+        } else {
+            return new Statues<>(1, "添加浏览量成功", null);
+        }
+    }
 }

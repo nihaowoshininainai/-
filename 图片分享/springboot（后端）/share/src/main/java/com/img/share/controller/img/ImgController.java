@@ -66,4 +66,9 @@ public class ImgController {
     public Statues<Integer> delLike(@RequestParam Integer uid, @RequestParam Integer iid) {
         return imgService.delLike(uid, iid);
     }
+
+    @RequestMapping("/addPageView")
+    public Statues<Integer> addPageView(@RequestParam Integer iid) {
+        return imgService.addPageView(iid);
+    }
 }
