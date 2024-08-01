@@ -3,6 +3,7 @@ import Comment from '@/components/imgview/Comment.vue';
 import Message from '@/components/imgview/Message.vue';
 import { Img } from '@/pojo/Img';
 import { useImgStore } from '@/stores/img';
+import imgApi from '@/api/img'
 
 const iid = useRoute().params.iid
 console.log(iid);
@@ -14,6 +15,8 @@ useImgStore().imgs.forEach((element) => {
     if (Number(iid) === element.iid)
         img.value = element
 })
+
+imgApi.addPageView(Number(iid));
 
 </script>
 <template>
