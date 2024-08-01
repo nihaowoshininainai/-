@@ -3,9 +3,7 @@ import { request } from "./request"
 import { useUserStore } from "@/stores/user"
 
 const getImgs = async (order: string, count: number, page: number) => {
-
-    return request.get(`/search?order=${order} &count=${count} &page=${page}`)
-
+    return request.get(`/search?order=${order} &count=${count} &page=${page} &iname=`)
 }
 
 const getCount = () => {
