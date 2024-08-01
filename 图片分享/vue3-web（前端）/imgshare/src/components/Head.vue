@@ -10,8 +10,12 @@ const searchIname = ref('')
 const search = () => {
     if (searchIname.value === '')
         ElMessage.warning('请输入图片名再回车搜索')
-    else
-        router.push(`/search/${searchIname.value}`)
+    else {
+        const iname = searchIname.value
+        searchIname.value = ''
+        router.push(`/search/${iname}`)
+    }
+        
 }
 
 </script>

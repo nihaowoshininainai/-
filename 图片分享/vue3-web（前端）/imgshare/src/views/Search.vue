@@ -3,7 +3,14 @@ import imgApi from '@/api/img'
 import global from '@/globalVariable/global';
 import { Img } from '@/pojo/Img';
 
-const iname = useRoute().params.iname as string
+const props = defineProps<{
+    iname: string
+}>()
+
+watch(props, (value, oldvalue) => {
+    getCount()
+    getSearch()
+})
 
 const order = ref('uploaddate')
 
@@ -35,11 +42,11 @@ const getCount = async () => {
 }
 
 const getSearch = async () => {
-    const { code, message, date } = (await imgApi.getSearch(order.value, pageSize.value, page.value, iname)).data
+    const { code, message, date } = (await imgApi.getSearch(order.value, pageSize.value, page.value, props.iname)).data
     imgs.value = date
     console.log(imgs.value)
     imgs.value.forEach(element => {
-        element.isrc = element.isrc.replace(global.original,global.host)
+        element.isrc = element.isrc.replace(global.original, global.host)
     });
 }
 

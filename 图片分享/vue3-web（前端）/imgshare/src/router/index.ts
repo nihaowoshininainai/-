@@ -41,7 +41,8 @@ const router = createRouter({
         {
           path: 'search/:iname',
           name: 'search',
-          component: Search
+          component: Search,
+          props:true
         }
       ]
     }
