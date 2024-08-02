@@ -11,7 +11,7 @@ defineProps<{
         <el-row :gutter="20">
             <el-col v-for="item in img" :span="span">
                 <router-link :to="`/img/${item.iid}`"><el-col
-                        :style="`background-image: url(${item.isrc}!300x300);`"></el-col></router-link>
+                        :style="`background-image: url(${encodeURI(item.isrc)}!300x300);`"></el-col></router-link>
             </el-col>
         </el-row>
     </div>
