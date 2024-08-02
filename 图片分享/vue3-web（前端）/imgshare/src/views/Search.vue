@@ -6,7 +6,7 @@ import router from '@/router';
 
 const props = defineProps<{
     iname: string,
-    order:string
+    order: string
 }>()
 
 watch(props, () => {
@@ -34,7 +34,7 @@ if (widowWidth < 1300) {
 }
 
 const getCount = async () => {
-    const { code, message, date } = (await imgApi.getCount()).data
+    const { code, message, date } = (await imgApi.getCount(props.iname)).data
     count.value = date
     console.log(count.value);
 

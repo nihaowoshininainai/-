@@ -4,8 +4,8 @@ import ShowImg from '@/components/ShowImg.vue';
 import router from '@/router';
 import { useImgStore } from '@/stores/img';
 
-const props = defineProps < {
-    order:string
+const props = defineProps<{
+    order: string
 }>()
 
 watch(props, () => {
@@ -31,7 +31,7 @@ if (widowWidth < 1300) {
 }
 
 const getCount = async () => {
-    const { code, message, date } = (await ImgApi.getCount()).data
+    const { code, message, date } = (await ImgApi.getCount('')).data
     count.value = date
     console.log(count.value);
 

@@ -6,8 +6,8 @@ const getImgs = async (order: string, count: number, page: number) => {
     return request.get(`/search?order=${order} &count=${count} &page=${page} &iname=`)
 }
 
-const getCount = () => {
-    return request.get('/getCount')
+const getCount = (iname: string) => {
+    return request.get(`/getCount?iname=${iname}`)
 }
 
 const getUserImg = async (uid: number) => {
