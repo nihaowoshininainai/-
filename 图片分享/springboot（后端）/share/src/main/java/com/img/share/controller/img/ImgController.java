@@ -38,8 +38,8 @@ public class ImgController {
     }
 
     @RequestMapping("/getCount")
-    public Statues<Integer> getCount() {
-        return imgService.getCount();
+    public Statues<Integer> getCount(@RequestParam String iname) {
+        return imgService.getCount(iname);
     }
 
     @RequestMapping("/getLikeImg")

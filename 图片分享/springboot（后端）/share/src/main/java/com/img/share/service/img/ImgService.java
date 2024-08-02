@@ -16,7 +16,7 @@ public interface ImgService {
 
     public Statues<List<Img>> search(String order, Integer page, Integer count,String iname);
 
-    public Statues<Integer> getCount();
+    public Statues<Integer> getCount(String iname);
 
     public Statues<List<Img>> getLikeImg(Integer uid);
 

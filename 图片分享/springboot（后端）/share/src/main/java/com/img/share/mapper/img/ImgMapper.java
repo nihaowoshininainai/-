@@ -23,8 +23,8 @@ public interface ImgMapper {
     public Integer delete(Integer iid, Integer uid);
 
     /* 获取总数 */
-    @Select("select count(*) from img")
-    public Integer getCount();
+    @Select("select count(*) from img WHERE iname LIKE CONCAT('%',#{iname},'%')")
+    public Integer getCount(String iname);
 
     /* 分页查 */
     @Select("select i.iid,i.iname,i.isrc,i.uploaddate,i.pageview,u.uid,u.uname from img i left join `user` u on i.uid = u.uid WHERE iname LIKE CONCAT('%',#{iname},'%') order by ${order} desc limit #{start},#{count}")

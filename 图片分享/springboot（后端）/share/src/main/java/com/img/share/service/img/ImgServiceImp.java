@@ -106,8 +106,8 @@ public class ImgServiceImp implements ImgService {
     }
 
     @Override
-    public Statues<Integer> getCount() {
-        return new Statues<>(1, "获取成功", imgMapper.getCount());
+    public Statues<Integer> getCount(String iname) {
+        return new Statues<>(1, "获取成功", imgMapper.getCount(iname));
     }
 
     @Override
