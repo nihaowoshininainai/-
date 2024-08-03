@@ -1,4 +1,4 @@
-package com.img.share.mapper.comment;
+package com.img.share.mapper;
 
 import java.util.List;
 

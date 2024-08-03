@@ -1,4 +1,4 @@
-package com.img.share.service.user;
+package com.img.share.service;
 
 import com.img.share.pojo.Statues;
 import com.img.share.pojo.User;

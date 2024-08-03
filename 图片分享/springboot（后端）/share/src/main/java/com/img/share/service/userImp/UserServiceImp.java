@@ -1,11 +1,12 @@
-package com.img.share.service.user;
+package com.img.share.service.userImp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.img.share.mapper.user.UserMapper;
+import com.img.share.mapper.UserMapper;
 import com.img.share.pojo.Statues;
 import com.img.share.pojo.User;
+import com.img.share.service.UserService;
 @Service
 public class UserServiceImp implements UserService {
     @Autowired

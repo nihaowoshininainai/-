@@ -1,4 +1,4 @@
-package com.img.share.mapper.img;
+package com.img.share.mapper;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.img.share.mapper.user;
+package com.img.share.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

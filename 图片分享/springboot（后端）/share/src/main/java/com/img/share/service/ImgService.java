@@ -1,4 +1,4 @@
-package com.img.share.service.img;
+package com.img.share.service;
 
 import java.io.IOException;
 import java.util.List;

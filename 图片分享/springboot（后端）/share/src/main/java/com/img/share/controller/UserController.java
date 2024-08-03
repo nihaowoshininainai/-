@@ -1,4 +1,4 @@
-package com.img.share.controller.user;
+package com.img.share.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.img.share.pojo.Statues;
 import com.img.share.pojo.User;
-import com.img.share.service.user.UserService;
+import com.img.share.service.UserService;
 
 @RestController
 @RequestMapping("/api")

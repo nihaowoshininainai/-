@@ -1,4 +1,4 @@
-package com.img.share.service.comment;
+package com.img.share.service.commentImp;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -7,9 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.img.share.mapper.comment.CommentMapper;
+import com.img.share.mapper.CommentMapper;
 import com.img.share.pojo.Comment;
 import com.img.share.pojo.Statues;
+import com.img.share.service.CommentService;
 
 @Service
 public class CommentServiceImp implements CommentService {

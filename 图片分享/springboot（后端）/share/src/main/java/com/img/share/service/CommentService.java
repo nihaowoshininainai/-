@@ -1,4 +1,4 @@
-package com.img.share.service.comment;
+package com.img.share.service;
 
 import java.util.List;
 

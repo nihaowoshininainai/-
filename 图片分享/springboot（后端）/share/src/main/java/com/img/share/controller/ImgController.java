@@ -1,4 +1,4 @@
-package com.img.share.controller.img;
+package com.img.share.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.img.share.pojo.Img;
 import com.img.share.pojo.Statues;
-import com.img.share.service.img.ImgService;
+import com.img.share.service.ImgService;
 
 @RestController
 @RequestMapping("/api")

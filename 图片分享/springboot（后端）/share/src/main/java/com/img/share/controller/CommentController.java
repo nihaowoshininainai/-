@@ -1,4 +1,4 @@
-package com.img.share.controller.comment;
+package com.img.share.controller;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.img.share.pojo.Comment;
 import com.img.share.pojo.Statues;
-import com.img.share.service.comment.CommentService;
+import com.img.share.service.CommentService;
 
 @RestController
 @RequestMapping("/api")

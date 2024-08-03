@@ -1,4 +1,4 @@
-package com.img.share.service.img;
+package com.img.share.service.imgImp;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,9 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.img.share.mapper.img.ImgMapper;
+import com.img.share.mapper.ImgMapper;
 import com.img.share.pojo.Img;
 import com.img.share.pojo.Statues;
+import com.img.share.service.ImgService;
 
 @Service
 public class ImgServiceImp implements ImgService {
