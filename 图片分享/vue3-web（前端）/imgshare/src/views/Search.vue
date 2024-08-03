@@ -6,7 +6,8 @@ import router from '@/router';
 
 const props = defineProps<{
     iname: string,
-    order: string
+    order: string,
+    page:string
 }>()
 
 watch(props, () => {
@@ -18,7 +19,7 @@ const count = ref(0)
 
 const pageSize = ref(18)
 
-const page = ref(1)
+const page = ref(Number(props.page))
 
 const span = ref(4)
 
@@ -58,13 +59,13 @@ onMounted(() => {
 const changeOrder = (e: any) => {
     console.log(e.target.innerText);
     if (e.target.innerText === '按日期')
-        router.push(`/search/${props.iname}/uploaddate`)
+        router.push(`/search/${props.iname}/uploaddate/${page.value}`)
     else
-        router.push(`/search/${props.iname}/pageview`)
+        router.push(`/search/${props.iname}/pageview/${page.value}`)
 }
 
 const changePage = () => {
-    getSearch()
+    router.push(`/search/${props.iname}/${props.order}/${page.value}`)
 }
 </script>
 <template>

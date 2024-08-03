@@ -11,7 +11,7 @@ const search = () => {
     else {
         const iname = searchIname.value
         searchIname.value = ''
-        router.push(`/search/${iname}/uploaddate`)
+        router.push(`/search/${iname}/uploaddate/1`)
     }
 
 }

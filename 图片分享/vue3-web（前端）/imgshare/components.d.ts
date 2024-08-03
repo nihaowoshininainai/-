@@ -42,4 +42,7 @@ declare module 'vue' {
     UserContent: typeof import('./src/components/userview/UserContent.vue')['default']
     UserHead: typeof import('./src/components/userview/UserHead.vue')['default']
   }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
+  }
 }

@@ -5,7 +5,8 @@ import router from '@/router';
 import { useImgStore } from '@/stores/img';
 
 const props = defineProps<{
-    order: string
+    order: string,
+    page: string
 }>()
 
 watch(props, () => {
@@ -17,7 +18,7 @@ const count = ref(0)
 
 const pageSize = ref(18)
 
-const page = ref(1)
+const page = ref(Number(props.page))
 
 const span = ref(4)
 
@@ -54,7 +55,7 @@ const changeOrder = (e: any) => {
 console.log(page.value);
 
 const changePage = () => {
-    useImgStore().getImgs(props.order, pageSize.value, page.value)
+    router.push(`/home/${props.order}/${page.value}`)
 }
 
 </script>
