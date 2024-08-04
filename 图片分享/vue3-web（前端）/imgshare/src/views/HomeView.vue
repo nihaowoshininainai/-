@@ -10,8 +10,7 @@ const props = defineProps<{
 }>()
 
 watch(props, () => {
-    getCount()
-    useImgStore().getImgs(props.order, pageSize.value, page.value)
+    location.reload()
 })
 
 const count = ref(0)
@@ -47,9 +46,9 @@ onBeforeMount(() => {
 const changeOrder = (e: any) => {
     console.log(e.target.innerText);
     if (e.target.innerText === '按日期')
-        router.push('/home/uploaddate')
+        router.push('/home/uploaddate/1')
     else
-        router.push('/home/pageview')
+        router.push('/home/pageview/1')
 }
 
 console.log(page.value);
