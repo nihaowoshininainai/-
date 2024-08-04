@@ -1,12 +1,18 @@
 package com.img.share.service.imgImp;
 
+import static com.img.share.utils.RedisConstans.CACHE_TTL;
+
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +20,10 @@ import com.img.share.mapper.ImgMapper;
 import com.img.share.pojo.Img;
 import com.img.share.pojo.Statues;
 import com.img.share.service.ImgService;
+import com.img.share.utils.CacheClient;
+
+import cn.hutool.core.util.StrUtil;
+import jakarta.annotation.Resource;
 
 @Service
 public class ImgServiceImp implements ImgService {
@@ -21,6 +31,11 @@ public class ImgServiceImp implements ImgService {
     /* public static final String FILEDIR = "D:/c/img"; */
     @Autowired
     private ImgMapper imgMapper;
+
+    @Resource
+    private CacheClient cacheClient;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     class AddImg extends Thread {
         MultipartFile file;
@@ -101,24 +116,45 @@ public class ImgServiceImp implements ImgService {
     }
 
     @Override
-    public Statues<List<Img>> search(String order, Integer page, Integer count,String iname) {
+    public Statues<List<Img>> search(String order, Integer page, Integer count, String iname) {
         String message = "这是第" + page + "页";
-        return new Statues<>(1, message, imgMapper.search(order, (page - 1) * count, count,iname));
+        Map<String, Object> map = new HashMap<>();
+        map.put("order", order);
+        map.put("page", page);
+        map.put("count", count);
+        map.put("iname", iname);
+        List<Img> imgs = cacheClient.queryManyWithPassThrough("search", map, Img.class,
+                map1 -> imgMapper.search(order, (page - 1) * count, count, iname), CACHE_TTL, TimeUnit.MINUTES);
+        return new Statues<>(1, message, imgs);
     }
 
     @Override
     public Statues<Integer> getCount(String iname) {
-        return new Statues<>(1, "获取成功", imgMapper.getCount(iname));
+        String key = "imgcount:" + iname;
+        String count = stringRedisTemplate.opsForValue().get(key);
+        if (StrUtil.isNotBlank(count))
+            return new Statues<>(1, "获取成功", Integer.parseInt(count));
+        count = String.valueOf(imgMapper.getCount(iname));
+        stringRedisTemplate.opsForValue().set(key, count, CACHE_TTL, TimeUnit.MINUTES);
+        return new Statues<>(1, "获取成功", Integer.parseInt(count));
     }
 
     @Override
     public Statues<List<Img>> getLikeImg(Integer uid) {
-        return new Statues<>(1, "获取成功", imgMapper.getLikeImg(uid));
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", uid);
+        List<Img> imgs = cacheClient.queryManyWithPassThrough("user:like:img", map, Img.class,
+                map1 -> imgMapper.getLikeImg(uid), CACHE_TTL, TimeUnit.MINUTES);
+        return new Statues<>(1, "获取成功", imgs);
     }
 
     @Override
     public Statues<List<Img>> getUserImg(Integer uid) {
-        return new Statues<>(1, "或取成功", imgMapper.getUserImg(uid));
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", uid);
+        List<Img> imgs = cacheClient.queryManyWithPassThrough("user:img", map, Img.class,
+                map1 -> imgMapper.getUserImg(uid), CACHE_TTL, TimeUnit.MINUTES);
+        return new Statues<>(1, "获取成功", imgs);
     }
 
     @Override
@@ -133,12 +169,25 @@ public class ImgServiceImp implements ImgService {
 
     @Override
     public Statues<Boolean> likeOrNot(Integer uid, Integer iid) {
-        Integer a = imgMapper.likeOrNot(uid, iid);
+        String key = "likeOrNot:uid:iid" + String.valueOf(uid) + String.valueOf(iid);
+        String result = stringRedisTemplate.opsForValue().get(key);
+        if (StrUtil.isNotBlank(result)) {
+            Integer a = Integer.parseInt(result);
+            if (a == 0) {
+                return new Statues<>(1, "未在喜欢列表中", false);
+            } else {
+                return new Statues<>(1, "在喜欢列表中", true);
+            }
+        }
+        result = String.valueOf(imgMapper.likeOrNot(uid, iid));
+        stringRedisTemplate.opsForValue().set(key, result, CACHE_TTL, TimeUnit.MINUTES);
+        Integer a = Integer.parseInt(result);
         if (a == 0) {
             return new Statues<>(1, "未在喜欢列表中", false);
         } else {
             return new Statues<>(1, "在喜欢列表中", true);
         }
+
     }
 
     @Override
