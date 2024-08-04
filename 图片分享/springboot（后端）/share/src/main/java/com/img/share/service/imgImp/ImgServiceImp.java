@@ -21,6 +21,7 @@ import com.img.share.pojo.Img;
 import com.img.share.pojo.Statues;
 import com.img.share.service.ImgService;
 import com.img.share.utils.CacheClient;
+import com.img.share.utils.ImgUpdate;
 
 import cn.hutool.core.util.StrUtil;
 import jakarta.annotation.Resource;
@@ -28,7 +29,7 @@ import jakarta.annotation.Resource;
 @Service
 public class ImgServiceImp implements ImgService {
     public static final String FILEDIR = "/mnt/nginx/html/";
-    /* public static final String FILEDIR = "D:/c/img"; */
+    /* public static final String FILEDIR = "D:/c/img/"; */
     @Autowired
     private ImgMapper imgMapper;
 
@@ -36,6 +37,9 @@ public class ImgServiceImp implements ImgService {
     private CacheClient cacheClient;
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
+    @Resource
+    private ImgUpdate imgUpdate;
 
     class AddImg extends Thread {
         MultipartFile file;
@@ -98,6 +102,7 @@ public class ImgServiceImp implements ImgService {
         if (a != 1) {
             return new Statues<Integer>(0, "添加图片失败", null);
         } else {
+            imgUpdate.UpdateImg(uid);
             return new Statues<Integer>(1, "添加图片成功", null);
         }
     }
@@ -110,6 +115,7 @@ public class ImgServiceImp implements ImgService {
         if (a == 0) {
             return new Statues<>(0, "删除失败", null);
         } else {
+            imgUpdate.UpdateImg(uid);
             return new Statues<>(1, "删除成功", null);
         }
 
@@ -163,6 +169,7 @@ public class ImgServiceImp implements ImgService {
         if (a != 1) {
             return new Statues<>(0, "添加至我喜欢失败", null);
         } else {
+            imgUpdate.UpdateLikeImg(uid, iid);
             return new Statues<>(1, "添加喜欢", null);
         }
     }
@@ -196,6 +203,7 @@ public class ImgServiceImp implements ImgService {
         if (a != 1) {
             return new Statues<>(0, "移除喜欢失败", null);
         } else {
+            imgUpdate.UpdateLikeImg(uid, iid);
             return new Statues<>(1, "从喜欢列表中移除", null);
         }
     }

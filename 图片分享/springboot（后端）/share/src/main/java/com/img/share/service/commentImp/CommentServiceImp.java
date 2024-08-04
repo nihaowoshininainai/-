@@ -17,6 +17,7 @@ import com.img.share.pojo.Comment;
 import com.img.share.pojo.Statues;
 import com.img.share.service.CommentService;
 import com.img.share.utils.CacheClient;
+import com.img.share.utils.CommentUpdate;
 
 import jakarta.annotation.Resource;
 
@@ -27,6 +28,9 @@ public class CommentServiceImp implements CommentService {
 
     @Resource
     private CacheClient cacheClient;
+
+    @Resource
+    private CommentUpdate commentUpdate;
 
     @Override
     public Statues<List<Comment>> getCommens(Integer iid) {
@@ -46,6 +50,7 @@ public class CommentServiceImp implements CommentService {
         if (a != 1) {
             return new Statues<>(0, "添加评论失败", null);
         } else {
+            commentUpdate.UpdateComment(iid);
             return new Statues<>(1, "添加评论成功", null);
         }
     }
@@ -74,6 +79,7 @@ public class CommentServiceImp implements CommentService {
         if (a != 1) {
             return new Statues<>(0, "点赞失败", null);
         } else {
+            commentUpdate.UpdateClickComment(uid);
             return new Statues<>(1, "点赞成功", null);
         }
     }
@@ -84,6 +90,7 @@ public class CommentServiceImp implements CommentService {
         if (a != 1) {
             return new Statues<>(0, "取消失败", null);
         } else {
+            commentUpdate.UpdateClickComment(uid);
             return new Statues<>(1, "取消点赞", null);
         }
     }

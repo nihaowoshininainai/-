@@ -13,7 +13,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 
 import static com.img.share.utils.RedisConstans.CACHE_TTL;
-
+/*查询结果缓存至redis */
 @Component
 public class CacheClient {
     private  StringRedisTemplate stringRedisTemplate;
