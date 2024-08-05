@@ -13,7 +13,7 @@ export default defineConfig({
     vue(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
-      imports:[
+      imports: [
         'vue',
         'pinia',
         'vue-router'
@@ -28,15 +28,15 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  server:{
-    proxy:{
-      '/api':{
-        target:'http://localhost:8080',
-        changeOrigin:true
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
       }
     }
   },
   esbuild: {
-   
+    drop: ["console"]
   }
 })
