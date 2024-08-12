@@ -15,5 +15,8 @@ export class ImgController {
     getByName(@Query() query: any) {
         return this.imgService.getByName(query.name)
     }
-    
+    @Get('delById')
+    delBYId(@Query() query: any) {
+        return this.imgService.delById(query.id)
+    }
 }

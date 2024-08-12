@@ -10,7 +10,7 @@ export class CommentController {
         return this.commentService.getAll()
     }
     @Get('delById')
-    delById(@Query() query: any) {
+    delById(@Query() query: any) {   
         return this.commentService.delById(query.id)
     }
 }
