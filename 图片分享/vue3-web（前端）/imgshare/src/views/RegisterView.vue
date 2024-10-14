@@ -98,7 +98,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
 }
 
 .left {
-    background-image: url(http://47.98.148.6:8094/1.png);
+    background-image: url(http://121.37.141.96:8094/11/11728389536682.png);
     background-size: cover;
 
 }

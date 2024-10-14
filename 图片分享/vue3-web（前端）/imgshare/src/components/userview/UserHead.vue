@@ -28,7 +28,7 @@ if (!flag) {
 
 <style lang="less" scoped>
 .el-row {
-    background-image: url(http://47.98.148.6:8094/%E9%81%BA%E5%85%89%E3%81%AE%E5%91%BC%E3%81%B3%E5%A3%B0-92968709.png);
+    background-image: url(http://121.37.141.96:8094/11/21728389848188.png);
     background-position: center center;
 
     .el-col {

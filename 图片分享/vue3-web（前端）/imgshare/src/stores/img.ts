@@ -1,6 +1,5 @@
 import { Img } from "@/pojo/Img"
 import ImgApi from '@/api/img'
-import global from '@/globalVariable/global'
 
 export const useImgStore = defineStore('img', () => {
     const imgs = ref<Img[]>([])
@@ -12,7 +11,7 @@ export const useImgStore = defineStore('img', () => {
         console.log(imgs.value);
 
         imgs.value.forEach(element => {
-            element.isrc = element.isrc.replace(global.original, global.host)
+            element.isrc = element.isrc.replace(import.meta.env.VITE_LOCAL, import.meta.env.VITE_HOST)
         });
     }
     async function getUserImgs(uid: number) {
@@ -20,7 +19,7 @@ export const useImgStore = defineStore('img', () => {
         userImgs.value.reverse()
         if (userImgs.value[0] != null)
             userImgs.value.forEach(element => {
-                element.isrc = element.isrc.replace(global.original, global.host)
+                element.isrc = element.isrc.replace(import.meta.env.VITE_LOCAL, import.meta.env.VITE_HOST)
             })
 
         console.log(userImgs.value);
@@ -31,7 +30,7 @@ export const useImgStore = defineStore('img', () => {
         likeImgs.value.reverse()
         if (likeImgs.value[0] != null)
             likeImgs.value.forEach(element => {
-                element.isrc = element.isrc.replace(global.original, global.host)
+                element.isrc = element.isrc.replace(import.meta.env.VITE_LOCAL, import.meta.env.VITE_HOST)
             })
         console.log(likeImgs.value);
     }

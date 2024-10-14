@@ -1,7 +1,6 @@
 import { User } from "@/pojo/User"
 import userApi from "@/api/user"
 import imgApi from "@/api/img"
-import global from "@/globalVariable/global"
 import type { Img } from "@/pojo/Img"
 
 
@@ -27,7 +26,7 @@ export const useUserStore = defineStore('user', () => {
         user.value.img.reverse()
         if (user.value.img[0] != null)
             user.value.img.forEach(element => {
-                element.isrc = element.isrc.replace(global.original, global.host)
+                element.isrc = element.isrc.replace(import.meta.env.VITE_LOCAL, import.meta.env.VITE_HOST)
             })
     }
     async function getLikeImg() {
@@ -35,7 +34,7 @@ export const useUserStore = defineStore('user', () => {
         console.log(user.value.likeImgs);
         user.value.likeImgs.reverse()
         user.value.likeImgs.forEach(element => {
-            element.isrc = element.isrc.replace(global.original, global.host)
+            element.isrc = element.isrc.replace(import.meta.env.VITE_LOCAL, import.meta.env.VITE_HOST)
         })
 
     }
