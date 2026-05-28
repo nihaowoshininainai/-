@@ -7,7 +7,6 @@ import { useUserStore } from '@/stores/user';
 const delImg = (index: number, img: Img) => {
     const delimg = new Img()
     delimg.iid = img.iid
-    delimg.user.uid = useUserStore().user.uid
     delimg.isrc = img.isrc.replace(global.host, global.original)
     console.log(delimg);
 

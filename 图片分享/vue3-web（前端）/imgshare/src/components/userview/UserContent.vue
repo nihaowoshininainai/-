@@ -14,7 +14,7 @@ if (flag.value) {
     useUserStore().getImgs()
 }
 else {
-    useImgStore().getUserImgs(uid)
+    useImgStore().getUserImgs()
 }
 
 const change = (e: any) => {
@@ -24,14 +24,14 @@ const change = (e: any) => {
         if (flag.value) {
             useUserStore().getImgs()
         } else {
-            useImgStore().getUserImgs(uid)
+            useImgStore().getUserImgs()
         }
     }
     else if ('喜欢的作品' === content.value) {
         if (flag.value) {
             useUserStore().getLikeImg()
         } else {
-            useImgStore().getLikeImgs(uid)
+            useImgStore().getLikeImgs()
         }
     }
 

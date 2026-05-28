@@ -1,49 +1,44 @@
 import type { Img } from "@/pojo/Img"
 import { request } from "./request"
-import { useUserStore } from "@/stores/user"
 
 const getImgs = async (order: string, count: number, page: number) => {
-    return request.get(`/search?order=${order} &count=${count} &page=${page} &iname=`)
+    return request.get(`/search?order=${order}&count=${count}&page=${page}&iname=`)
 }
 
 const getCount = (iname: string) => {
     return request.get(`/getCount?iname=${iname}`)
 }
 
-const getUserImg = async (uid: number) => {
-    return request.get(`/getUserImg?uid=${uid}`)
+const getUserImg = async () => {
+    return request.get(`/getUserImg`)
 }
 
-const getLikeImg = (uid: number) => {
-    return request.get(`/getLikeImg?uid=${uid}`)
+const getLikeImg = () => {
+    return request.get(`/getLikeImg`)
 }
 
 const delUserImg = (img: Img) => {
     return request.post('deleteImg', img)
 }
 
-const getImgMessage = (img: Img) => {
-    const url = `/likeOrNot?uid=${useUserStore().user.uid}&&iid=${img.iid}`
-    return request.get(url)
+const getImgMessage = (iid: number) => {
+    return request.get(`/likeOrNot?iid=${iid}`)
 }
 
-const addLike = (img: Img) => {
-    const url = `/addLike?uid=${useUserStore().user.uid}&&iid=${img.iid}`
-    return request.get(url)
+const addLike = (iid: number) => {
+    return request.get(`/addLike?iid=${iid}`)
 }
 
-const delLike = (uid: number, iid: number) => {
-    const url = `/delLike?uid=${uid}&iid=${iid}`
-    return request.get(url)
+const delLike = (iid: number) => {
+    return request.get(`/delLike?iid=${iid}`)
 }
 
 const addPageView = (iid: number) => {
-    const url = `/addPageView?iid=${iid}`
-    return request.get(url)
+    return request.get(`/addPageView?iid=${iid}`)
 }
 
 const getSearch = async (order: string, count: number, page: number, iname: string) => {
-    return request.get(`/search?order=${order} &count=${count} &page=${page} &iname=${iname}`)
+    return request.get(`/search?order=${order}&count=${count}&page=${page}&iname=${iname}`)
 }
 export default {
     getImgs: getImgs,

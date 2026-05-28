@@ -3,7 +3,17 @@ import router from '@/router';
 import { useUserStore } from '@/stores/user';
 import { Search } from '@element-plus/icons-vue'
 
-const user = useUserStore().user
+const userStore = useUserStore()
+const user = userStore.user
+
+if (user.uid === -1) {
+    const stored = localStorage.getItem('user')
+    if (stored) {
+        const parsed = JSON.parse(stored)
+        user.uid = parsed.uid
+        user.uname = parsed.uname
+    }
+}
 
 const searchIname = ref('')
 
@@ -16,6 +26,11 @@ const search = () => {
         router.push(`/search/${iname}/uploaddate/1`)
     }
         
+}
+
+const logout = () => {
+    userStore.logout()
+    router.push('/home')
 }
 
 </script>
@@ -39,8 +54,11 @@ const search = () => {
         <el-col :span="8" v-if="user.uid != -1">
             <el-text><el-input v-model="searchIname" :prefix-icon="Search" @keydown.enter="search"></el-input></el-text>
         </el-col>
-        <el-col :span="4">
+        <el-col :span="4" v-if="user.uid != -1">
             <router-link :to="'/uid/' + user.uid"><el-link :underline="false">用户</el-link></router-link>
+        </el-col>
+        <el-col :span="4" v-if="user.uid != -1">
+            <el-link :underline="false" @click="logout">退出</el-link>
         </el-col>
     </el-row>
 </template>

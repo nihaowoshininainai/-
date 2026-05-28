@@ -1,28 +1,25 @@
 import type { Img } from "@/pojo/Img"
 import { request } from "./request"
-import type { User } from "@/pojo/User"
-import type { Commentt } from "@/pojo/Commentt"
+
 const getComment = (img: Img) => {
     return request.get(`/getComment?iid=${img.iid}`)
 }
-const addComment = (img: Img, user: User, content: string) => {
+const addComment = (iid: number, content: string) => {
     return request.post('/addComment', {
-        img: img,
-        user: user,
+        img: { iid: iid },
         content: content
     })
 }
-const clickLike = (user: User, comment: Commentt) => {
-    return request.get(`/clickLike?uid=${user.uid}&cid=${comment.cid}`)
+const clickLike = (cid: number) => {
+    return request.get(`/clickLike?cid=${cid}`)
 }
 
-const getClickLike = (user: User) => {
-    return request.get(`/getClickComments?uid=${user.uid}`)
+const getClickLike = () => {
+    return request.get(`/getClickComments`)
 }
 
-const delClick = (cid: number, uid: number) => {
-    const url = `/delClick?cid=${cid}&uid=${uid}`
-    return request.get(url)
+const delClick = (cid: number) => {
+    return request.get(`/delClick?cid=${cid}`)
 }
 export default {
     getComment: getComment,

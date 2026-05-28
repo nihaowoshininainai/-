@@ -8,13 +8,13 @@ const props = defineProps<{
 }>()
 
 const flag = ref(false)
-imgApi.getImgMessage(props.img).then((value) => {
+imgApi.getImgMessage(props.img.iid).then((value) => {
     console.log(value.data.date);
     flag.value = value.data.date
 })
 
 const addLike = () => {
-    imgApi.addLike(props.img).then((value) => {
+    imgApi.addLike(props.img.iid).then((value) => {
         console.log(value)
         const { code, message, date } = value.data
         if (code === 1) {

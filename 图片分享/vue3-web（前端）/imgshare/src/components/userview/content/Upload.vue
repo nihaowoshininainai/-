@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import { useUserStore } from '@/stores/user';
 import { genFileId, type UploadInstance, type UploadProps, type UploadRawFile } from 'element-plus';
 
 const uploadRef = ref<UploadInstance>()
 
 const img = ref({
-    iname: '',
-    uid: useUserStore().user.uid
+    iname: ''
+})
+
+const uploadHeaders = computed(() => {
+    const token = localStorage.getItem('token')
+    return token ? { Authorization: `Bearer ${token}` } : {}
 })
 
 const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawfile) => {
@@ -40,7 +43,8 @@ const upError = () => {
 <template>
     <span>图片名：</span>
     <el-input v-model="img.iname" style="width: 20%;"></el-input>
-    <el-upload ref="uploadRef" class="upload-demo" action="/api/addImg" :auto-upload="false" :data="img" style="width: 50%;
+    <el-upload ref="uploadRef" class="upload-demo" action="/api/addImg" :headers="uploadHeaders" :auto-upload="false"
+        :data="img" style="width: 50%;
                 margin: 40px auto;" list-type="picture" :on-error="upError" :on-success="success"
         :before-upload="beforeAvatarUpload" :limit="1" :on-exceed="handleExceed">
         <template #trigger>

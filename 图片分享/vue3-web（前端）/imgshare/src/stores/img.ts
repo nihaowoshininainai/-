@@ -14,8 +14,8 @@ export const useImgStore = defineStore('img', () => {
             element.isrc = element.isrc.replace(import.meta.env.VITE_LOCAL, import.meta.env.VITE_HOST)
         });
     }
-    async function getUserImgs(uid: number) {
-        userImgs.value = (await ImgApi.getUserImg(uid)).data.date
+    async function getUserImgs() {
+        userImgs.value = (await ImgApi.getUserImg()).data.date
         userImgs.value.reverse()
         if (userImgs.value[0] != null)
             userImgs.value.forEach(element => {
@@ -25,8 +25,8 @@ export const useImgStore = defineStore('img', () => {
         console.log(userImgs.value);
 
     }
-    async function getLikeImgs(uid: number) {
-        likeImgs.value = (await ImgApi.getLikeImg(uid)).data.date
+    async function getLikeImgs() {
+        likeImgs.value = (await ImgApi.getLikeImg()).data.date
         likeImgs.value.reverse()
         if (likeImgs.value[0] != null)
             likeImgs.value.forEach(element => {

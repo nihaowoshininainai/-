@@ -6,7 +6,6 @@ import type { Img } from "@/pojo/Img"
 
 export const useUserStore = defineStore('user', () => {
     const user = ref<User>(new User())
-    console.log(user)
 
     function login(
         uname: string, pwd: string
@@ -20,8 +19,15 @@ export const useUserStore = defineStore('user', () => {
         user.value.pwd = pwd
         userApi.userRegisterApi(user.value)
     }
+
+    function logout() {
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
+        user.value = new User()
+    }
+
     async function getImgs() {
-        user.value.img = (await imgApi.getUserImg(user.value.uid)).data.date
+        user.value.img = (await imgApi.getUserImg()).data.date
         console.log(user.value.img);
         user.value.img.reverse()
         if (user.value.img[0] != null)
@@ -30,7 +36,7 @@ export const useUserStore = defineStore('user', () => {
             })
     }
     async function getLikeImg() {
-        user.value.likeImgs = (await imgApi.getLikeImg(user.value.uid)).data.date
+        user.value.likeImgs = (await imgApi.getLikeImg()).data.date
         console.log(user.value.likeImgs);
         user.value.likeImgs.reverse()
         user.value.likeImgs.forEach(element => {
@@ -48,7 +54,7 @@ export const useUserStore = defineStore('user', () => {
 
     }
     async function delLike(iid: number) {
-        imgApi.delLike(user.value.uid, iid).then((value) => {
+        imgApi.delLike(iid).then((value) => {
             const { code, message, date } = value.data
             if (code === 1) {
                 ElMessage.success(message)
@@ -61,6 +67,7 @@ export const useUserStore = defineStore('user', () => {
         login,
         user,
         register,
+        logout,
         getImgs,
         getLikeImg,
         deleteImg,
