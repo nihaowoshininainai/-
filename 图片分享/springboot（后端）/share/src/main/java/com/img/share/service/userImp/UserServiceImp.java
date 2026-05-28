@@ -19,6 +19,9 @@ public class UserServiceImp implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
     @Override
     public Statues<Map<String, Object>> login(String uname, String pwd) {
         User user = userMapper.findByUname(uname);
@@ -28,7 +31,7 @@ public class UserServiceImp implements UserService {
         if (!BCrypt.checkpw(pwd, user.getPwd())) {
             return new Statues<>(0, "用户名或密码错误", null);
         }
-        String token = JwtUtil.createToken(user.getUid(), user.getUname());
+        String token = jwtUtil.createToken(user.getUid(), user.getUname());
         user.setPwd(null);
         Map<String, Object> result = new HashMap<>();
         result.put("user", user);

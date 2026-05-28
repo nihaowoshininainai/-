@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,8 +29,9 @@ import jakarta.annotation.Resource;
 
 @Service
 public class ImgServiceImp implements ImgService {
-    public static final String FILEDIR = "/mnt/nginx/html/";
-    /* public static final String FILEDIR = "D:/c/img/"; */
+    @Value("${file.upload.path}")
+    private String fileDir;
+
     @Autowired
     private ImgMapper imgMapper;
 
@@ -56,7 +58,7 @@ public class ImgServiceImp implements ImgService {
         @Override
         public void run() {
             @SuppressWarnings("null")
-            String filepath = FILEDIR + this.uid + "/" + this.iname + this.time
+            String filepath = fileDir + this.uid + "/" + this.iname + this.time
                     + this.file.getOriginalFilename().substring(this.file.getOriginalFilename().lastIndexOf("."));
             File newFile = new File(filepath);
             File dir = newFile.getParentFile();
@@ -94,7 +96,7 @@ public class ImgServiceImp implements ImgService {
         AddImg addImg = new AddImg(file, iname, uid);
         addImg.start();
         @SuppressWarnings("null")
-        String filepath = FILEDIR + addImg.uid + "/" + addImg.iname + addImg.time
+        String filepath = fileDir + addImg.uid + "/" + addImg.iname + addImg.time
                 + addImg.file.getOriginalFilename().substring(addImg.file.getOriginalFilename().lastIndexOf("."));
         System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(addImg.time)));
         Integer a = imgMapper.add(addImg.iname, filepath,

@@ -11,17 +11,23 @@ import java.util.Set;
 
 public class LoginInterceptor implements HandlerInterceptor {
 
+    private final JwtUtil jwtUtil;
+
+    public LoginInterceptor(JwtUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
+    }
+
     private static final Set<String> EXCLUDE_PATHS = Set.of(
             "/api/login",
             "/api/register",
             "/api/search",
             "/api/getCount",
             "/api/addPageView",
-            "/api/getComment"
-    );
+            "/api/getComment");
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws Exception {
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             return true;
         }
@@ -43,7 +49,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
 
         String token = authHeader.substring(7);
-        if (!JwtUtil.verify(token)) {
+        if (!jwtUtil.verify(token)) {
             response.setContentType("application/json;charset=UTF-8");
             response.setStatus(401);
             Statues<Void> result = new Statues<>(0, "登录已过期，请重新登录", null);
@@ -51,8 +57,8 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        Integer uid = JwtUtil.getUid(token);
-        String uname = JwtUtil.getUname(token);
+        Integer uid = jwtUtil.getUid(token);
+        String uname = jwtUtil.getUname(token);
         if (uid == null || uname == null) {
             response.setContentType("application/json;charset=UTF-8");
             response.setStatus(401);
