@@ -217,4 +217,14 @@ public class ImgServiceImp implements ImgService {
             return new Statues<>(1, "添加浏览量成功", null);
         }
     }
+
+    @Override
+    public Statues<Img> getImgById(Integer iid) {
+        Img img = cacheClient.queryWithPassThrough("img:", iid, Img.class,
+                id -> imgMapper.getImgById(id), CACHE_TTL, TimeUnit.MINUTES);
+        if (img == null) {
+            return new Statues<>(0, "图片不存在", null);
+        }
+        return new Statues<>(1, "获取成功", img);
+    }
 }

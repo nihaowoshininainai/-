@@ -29,4 +29,6 @@ public interface ImgService {
     public Statues<Integer> delLike(Integer uid, Integer iid);
 
     public Statues<Integer> addPageView(Integer iid);
+
+    public Statues<Img> getImgById(Integer iid);
 }

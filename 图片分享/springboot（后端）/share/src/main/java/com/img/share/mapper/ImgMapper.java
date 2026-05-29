@@ -55,4 +55,11 @@ public interface ImgMapper {
 
     @Update("UPDATE img SET pageview = pageview + 1 WHERE iid = #{iid}")
     public Integer addPageView(Integer iid);
+
+    @Select("select i.iid,i.iname,i.isrc,i.uploaddate,i.pageview,u.uid,u.uname from img i left join `user` u on i.uid = u.uid WHERE i.iid = #{iid}")
+    @Results({
+            @Result(property = "user.uid", column = "uid"),
+            @Result(property = "user.uname", column = "uname")
+    })
+    public Img getImgById(Integer iid);
 }

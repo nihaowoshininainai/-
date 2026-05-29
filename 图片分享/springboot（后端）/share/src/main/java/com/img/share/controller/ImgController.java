@@ -74,4 +74,9 @@ public class ImgController {
     public Statues<Integer> addPageView(@RequestParam Integer iid) {
         return imgService.addPageView(iid);
     }
+
+    @GetMapping("/getImgById")
+    public Statues<Img> getImgById(@RequestParam Integer iid) {
+        return imgService.getImgById(iid);
+    }
 }

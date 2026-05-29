@@ -25,7 +25,8 @@ public class WebConfig implements WebMvcConfigurer {
                         "/api/search",
                         "/api/getCount",
                         "/api/addPageView",
-                        "/api/getComment"
+                        "/api/getComment",
+                        "/api/getImgById"
                 );
     }
 

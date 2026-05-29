@@ -40,6 +40,7 @@ Token 由登录接口返回，有效期 **7天**。未登录或 Token 过期将�
 | `POST /api/register` | 注册 |
 | `GET /api/search` | 搜索图片 |
 | `GET /api/getCount` | 获取图片总数 |
+| `GET /api/getImgById` | 按ID查询图片 |
 | `GET /api/getComment` | 获取图片评论 |
 | `GET /api/addPageView` | 增加浏览量 |
 
@@ -247,7 +248,53 @@ GET /api/search?order=pageview&count=10&page=1&iname=风景
 
 ---
 
-### 6. 获取图片总数（公开）
+### 6. 按ID查询图片（公开）
+
+```
+GET /api/getImgById?iid=1
+```
+
+**Query 参数**:
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `iid` | Integer | 是 | 图片ID |
+
+**成功响应**:
+
+```json
+{
+  "code": 1,
+  "message": "获取成功",
+  "date": {
+    "iid": 1,
+    "iname": "风景图",
+    "isrc": "img/2026-05-29/风景1716998400000.jpg",
+    "uploaddate": "2026-05-29",
+    "user": {
+      "uid": 1,
+      "uname": "上传者用户名"
+    },
+    "pageview": 128,
+    "comment": null,
+    "likUsers": null
+  }
+}
+```
+
+**失败响应**（图片不存在）:
+
+```json
+{
+  "code": 0,
+  "message": "图片不存在",
+  "date": null
+}
+```
+
+---
+
+### 7. 获取图片总数（公开）
 
 ```
 GET /api/getCount?iname=风景
@@ -271,7 +318,7 @@ GET /api/getCount?iname=风景
 
 ---
 
-### 7. 获取我点赞的图片
+### 8. 获取我点赞的图片
 
 > **需要认证**
 
@@ -305,7 +352,7 @@ Authorization: Bearer <token>
 
 ---
 
-### 8. 获取我上传的图片
+### 9. 获取我上传的图片
 
 > **需要认证**
 
@@ -319,11 +366,11 @@ GET /api/getUserImg
 Authorization: Bearer <token>
 ```
 
-**成功响应**: 格式同 [获取我点赞的图片](#7-获取我点赞的图片)
+**成功响应**: 格式同 [获取我点赞的图片](#8-获取我点赞的图片)
 
 ---
 
-### 9. 点赞图片
+### 10. 点赞图片
 
 > **需要认证**
 
@@ -349,7 +396,7 @@ GET /api/addLike?iid=1
 
 ---
 
-### 10. 判断是否已点赞
+### 11. 判断是否已点赞
 
 > **需要认证**
 
@@ -375,7 +422,7 @@ GET /api/likeOrNot?iid=1
 
 ---
 
-### 11. 取消点赞
+### 12. 取消点赞
 
 > **需要认证**
 
@@ -401,7 +448,7 @@ GET /api/delLike?iid=1
 
 ---
 
-### 12. 增加浏览量（公开）
+### 13. 增加浏览量（公开）
 
 ```
 GET /api/addPageView?iid=1
@@ -427,7 +474,7 @@ GET /api/addPageView?iid=1
 
 ## 三、评论模块
 
-### 13. 获取评论列表（公开）
+### 14. 获取评论列表（公开）
 
 ```
 GET /api/getComment?iid=1
@@ -462,7 +509,7 @@ GET /api/getComment?iid=1
 
 ---
 
-### 14. 添加评论
+### 15. 添加评论
 
 > **需要认证**
 
@@ -498,7 +545,7 @@ POST /api/addComment
 
 ---
 
-### 15. 删除评论
+### 16. 删除评论
 
 > **需要认证**
 
@@ -530,7 +577,7 @@ POST /api/delComment
 
 ---
 
-### 16. 获取我点过赞的评论ID列表
+### 17. 获取我点过赞的评论ID列表
 
 > **需要认证**
 
@@ -556,7 +603,7 @@ Authorization: Bearer <token>
 
 ---
 
-### 17. 点赞评论
+### 18. 点赞评论
 
 > **需要认证**
 
@@ -582,7 +629,7 @@ GET /api/clickLike?cid=1
 
 ---
 
-### 18. 取消评论点赞
+### 19. 取消评论点赞
 
 > **需要认证**
 
@@ -617,19 +664,20 @@ GET /api/delClick?cid=1
 | 3 | POST | `/api/addImg` | 是 | 上传图片 |
 | 4 | POST | `/api/deleteImg` | 是 | 删除图片 |
 | 5 | GET | `/api/search` | 否 | 搜索图片 |
-| 6 | GET | `/api/getCount` | 否 | 图片总数 |
-| 7 | GET | `/api/getLikeImg` | 是 | 我点赞的图片 |
-| 8 | GET | `/api/getUserImg` | 是 | 我上传的图片 |
-| 9 | GET | `/api/addLike` | 是 | 点赞图片 |
-| 10 | GET | `/api/likeOrNot` | 是 | 是否已点赞 |
-| 11 | GET | `/api/delLike` | 是 | 取消点赞图片 |
-| 12 | GET | `/api/addPageView` | 否 | 增加浏览量 |
-| 13 | GET | `/api/getComment` | 否 | 获取评论 |
-| 14 | POST | `/api/addComment` | 是 | 添加评论 |
-| 15 | POST | `/api/delComment` | 是 | 删除评论 |
-| 16 | GET | `/api/getClickComments` | 是 | 我点赞的评论ID |
-| 17 | GET | `/api/clickLike` | 是 | 点赞评论 |
-| 18 | GET | `/api/delClick` | 是 | 取消评论点赞 |
+| 6 | GET | `/api/getImgById` | 否 | 按ID查询图片 |
+| 7 | GET | `/api/getCount` | 否 | 图片总数 |
+| 8 | GET | `/api/getLikeImg` | 是 | 我点赞的图片 |
+| 9 | GET | `/api/getUserImg` | 是 | 我上传的图片 |
+| 10 | GET | `/api/addLike` | 是 | 点赞图片 |
+| 11 | GET | `/api/likeOrNot` | 是 | 是否已点赞 |
+| 12 | GET | `/api/delLike` | 是 | 取消点赞图片 |
+| 13 | GET | `/api/addPageView` | 否 | 增加浏览量 |
+| 14 | GET | `/api/getComment` | 否 | 获取评论 |
+| 15 | POST | `/api/addComment` | 是 | 添加评论 |
+| 16 | POST | `/api/delComment` | 是 | 删除评论 |
+| 17 | GET | `/api/getClickComments` | 是 | 我点赞的评论ID |
+| 18 | GET | `/api/clickLike` | 是 | 点赞评论 |
+| 19 | GET | `/api/delClick` | 是 | 取消评论点赞 |
 
 ---
 
