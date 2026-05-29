@@ -65,7 +65,7 @@ public class ImgServiceImp implements ImgService {
 
         @Override
         public void run() {
-            File newFile = new File(filepath);
+            File newFile = new File(System.getProperty("user.dir"), filepath);
             File dir = newFile.getParentFile();
             if (!dir.exists()) {
                 dir.mkdirs();
@@ -87,7 +87,7 @@ public class ImgServiceImp implements ImgService {
 
         @Override
         public void run() {
-            File file = new File(path);
+            File file = new File(System.getProperty("user.dir"), path);
             file.delete();
         }
     }
