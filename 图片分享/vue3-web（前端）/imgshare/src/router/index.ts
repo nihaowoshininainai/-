@@ -1,57 +1,63 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
-import LoginView from '@/views/LoginView.vue'
-import RegisterView from '@/views/RegisterView.vue'
-import UserView from '@/views/UserView.vue'
-import ImgView from '@/views/ImgView.vue'
-import Search from '@/views/Search.vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
+
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',
-      name: 'main',
-      redirect: '/home',
-      children: [
-        {
-          path: 'home',
-          redirect: '/home/uploaddate/1'
-        },
-        {
-          path: 'home/:order/:page',
-          name: 'home',
-          component: HomeView,
-          props: true
-        },
-        {
-          path: 'login',
-          name: 'login',
-          component: LoginView
-        },
-        {
-          path: 'register',
-          name: 'register',
-          component: RegisterView
-        },
-        {
-          path: 'uid/:uid',
-          name: 'user',
-          component: UserView
-        },
-        {
-          path: 'img/:iid',
-          name: 'img',
-          component: ImgView
-        },
-        {
-          path: 'search/:iname/:order/:page',
-          name: 'search',
-          component: Search,
-          props:true
-        }
-      ]
+      name: 'home',
+      component: () => import('@/views/Home.vue'),
+      meta: { title: 'ImgShare - 发现图片' }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/Login.vue'),
+      meta: { title: '登录 - ImgShare' }
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('@/views/Register.vue'),
+      meta: { title: '注册 - ImgShare' }
+    },
+    {
+      path: '/detail/:iid',
+      name: 'detail',
+      component: () => import('@/views/Detail.vue'),
+      meta: { title: '图片详情 - ImgShare' }
+    },
+    {
+      path: '/upload',
+      name: 'upload',
+      component: () => import('@/views/Upload.vue'),
+      meta: { title: '上传图片 - ImgShare', requiresAuth: true }
+    },
+    {
+      path: '/my/images',
+      name: 'myImages',
+      component: () => import('@/views/MyImages.vue'),
+      meta: { title: '我的上传 - ImgShare', requiresAuth: true }
+    },
+    {
+      path: '/my/likes',
+      name: 'myLikes',
+      component: () => import('@/views/MyLikes.vue'),
+      meta: { title: '我的点赞 - ImgShare', requiresAuth: true }
     }
   ]
+})
+
+router.beforeEach((to, _from, next) => {
+  document.title = (to.meta.title as string) || 'ImgShare'
+  if (to.meta.requiresAuth) {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      next({ name: 'login', query: { redirect: to.fullPath } })
+      return
+    }
+  }
+  next()
 })
 
 export default router

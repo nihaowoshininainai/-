@@ -6,22 +6,16 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
-
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
-      imports: [
-        'vue',
-        'pinia',
-        'vue-router'
-      ]
+      imports: ['vue', 'pinia', 'vue-router']
     }),
     Components({
-      resolvers: [ElementPlusResolver()],
-    }),
+      resolvers: [ElementPlusResolver()]
+    })
   ],
   resolve: {
     alias: {
@@ -31,12 +25,13 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://121.37.141.96:8080',
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+      '/img': {
+        target: 'http://localhost:8080',
         changeOrigin: true
       }
     }
-  },
-  esbuild: {
-    drop: ["console"]
   }
 })
