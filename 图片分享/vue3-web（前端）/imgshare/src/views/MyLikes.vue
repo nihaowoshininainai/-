@@ -20,7 +20,7 @@
     </div>
 
     <div v-else class="image-grid">
-      <ImageCard v-for="img in images" :key="img.iid" :image="img" />
+      <ImageCard v-for="img in images" :key="img.iid" :image="img" hide-author />
     </div>
   </div>
 </template>

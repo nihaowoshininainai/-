@@ -75,23 +75,21 @@
                   </div>
                   <p class="comment-content">{{ comment.content }}</p>
                   <div class="comment-actions">
-                    <span
-                      :class="['comment-like', { liked: likedComments.includes(comment.cid) }]"
+                    <button
+                      :class="['comment-like-btn', { liked: likedComments.includes(comment.cid) }]"
                       @click="toggleCommentLike(comment.cid)"
                     >
-                      <el-icon :size="14">
-                        <CaretTop v-if="likedComments.includes(comment.cid)" />
-                        <CaretTop v-else />
-                      </el-icon>
-                      {{ comment.clicklike }}
-                    </span>
-                    <span
+                      <el-icon :size="14"><Pointer /></el-icon>
+                      <span v-if="comment.clicklike > 0">{{ comment.clicklike }}</span>
+                    </button>
+                    <button
                       v-if="comment.user.uid === auth.user?.uid"
-                      class="comment-delete"
+                      class="comment-delete-btn"
                       @click="deleteComment(comment.cid)"
                     >
-                      删除
-                    </span>
+                      <el-icon :size="13"><Delete /></el-icon>
+                      <span>删除</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -130,7 +128,7 @@ import { get, post } from '@/utils/api'
 import { useAuthStore } from '@/stores/auth'
 import type { ImageItem, CommentItem } from '@/types/api'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { Star, StarFilled, CaretTop } from '@element-plus/icons-vue'
+import { Star, StarFilled, Pointer, Delete } from '@element-plus/icons-vue'
 
 const route = useRoute()
 const auth = useAuthStore()
@@ -148,13 +146,12 @@ async function fetchDetail() {
   loading.value = true
   try {
     const [imgRes, commentRes] = await Promise.all([
-      get<ImageItem[]>('/search', { order: 'uploaddate', count: 1, page: 1, iname: '' }),
+      get<ImageItem>('/getImgById', { iid }),
       get<CommentItem[]>('/getComment', { iid }),
       get<number>('/addPageView', { iid })
     ])
 
-    const allImages = imgRes.date
-    image.value = allImages.find((img: ImageItem) => img.iid === iid) || null
+    image.value = imgRes.date
     comments.value = commentRes.date || []
 
     if (auth.isLoggedIn) {
@@ -396,32 +393,54 @@ onMounted(() => {
 .comment-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-top: 8px;
+  gap: 8px;
+  margin-top: 10px;
 }
 
-.comment-like {
-  display: flex;
+.comment-like-btn {
+  display: inline-flex;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
+  padding: 4px 12px;
+  border: 1px solid var(--pixiv-border);
+  border-radius: 16px;
+  background: #fff;
   font-size: 13px;
   color: var(--pixiv-text-secondary);
   cursor: pointer;
-  transition: color 0.2s;
+  transition: all 0.2s ease;
 }
 
-.comment-like.liked {
-  color: var(--pixiv-blue);
-}
-
-.comment-delete {
-  font-size: 12px;
+.comment-like-btn:hover {
+  border-color: #e74c3c;
   color: #e74c3c;
-  cursor: pointer;
+  background: #fef2f2;
 }
 
-.comment-delete:hover {
-  text-decoration: underline;
+.comment-like-btn.liked {
+  background: #fef2f2;
+  border-color: #e74c3c;
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+.comment-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 16px;
+  background: transparent;
+  font-size: 12px;
+  color: #999;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.comment-delete-btn:hover {
+  color: #e74c3c;
+  background: #fef2f2;
 }
 
 .detail-sidebar {

@@ -20,7 +20,7 @@
     </div>
 
     <div v-else class="image-grid">
-      <ImageCard v-for="img in images" :key="img.iid" :image="img" />
+      <ImageCard v-for="img in images" :key="img.iid" :image="img" :author-name="auth.username" />
     </div>
   </div>
 </template>
@@ -28,8 +28,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { get } from '@/utils/api'
+import { useAuthStore } from '@/stores/auth'
 import type { MyImageItem } from '@/types/api'
 import ImageCard from '@/components/ImageCard.vue'
+
+const auth = useAuthStore()
 
 const images = ref<MyImageItem[]>([])
 const loading = ref(false)

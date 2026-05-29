@@ -5,16 +5,16 @@
       <div class="card-overlay">
         <div class="overlay-info">
           <span class="overlay-title">{{ image.iname }}</span>
-          <span class="overlay-author">by {{ image.user?.uname || '未知' }}</span>
+          <span v-if="!hideAuthor" class="overlay-author">by {{ displayName }}</span>
         </div>
       </div>
     </div>
     <div class="card-footer">
       <span class="card-title" :title="image.iname">{{ image.iname }}</span>
       <div class="card-meta">
-        <span class="card-author">
+        <span v-if="!hideAuthor" class="card-author">
           <el-icon :size="12"><User /></el-icon>
-          {{ image.user?.uname || '未知' }}
+          {{ displayName }}
         </span>
         <span class="card-views">
           <el-icon :size="12"><View /></el-icon>
@@ -31,9 +31,16 @@ import type { ImageItem, MyImageItem } from '@/types/api'
 
 const props = defineProps<{
   image: ImageItem | MyImageItem
+  authorName?: string
+  hideAuthor?: boolean
 }>()
 
 const imgFailed = ref(false)
+
+const displayName = computed(() => {
+  if (props.authorName) return props.authorName
+  return 'user' in props.image && props.image.user?.uname ? props.image.user.uname : '未知'
+})
 
 const imageSrc = computed(() => {
   if (imgFailed.value) return ''
