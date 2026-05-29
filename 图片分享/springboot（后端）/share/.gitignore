@@ -35,3 +35,6 @@ build/
 ### Environment Config ###
 application-test.properties
 application-prod.properties
+
+### Upload ###
+img/

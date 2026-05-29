@@ -4,8 +4,8 @@ import static com.img.share.utils.RedisConstans.CACHE_TTL;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,36 +43,38 @@ public class ImgServiceImp implements ImgService {
     @Resource
     private ImgUpdate imgUpdate;
 
+    private String buildFilePath(MultipartFile file, String iname, long timestamp) {
+        String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+        String dateStr = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
+        return fileDir + dateStr + "/" + iname + timestamp + ext;
+    }
+
     class AddImg extends Thread {
         MultipartFile file;
         String iname;
         Integer uid;
         long time = System.currentTimeMillis();
+        String filepath;
 
         public AddImg(MultipartFile file, String iname, Integer uid) {
             this.file = file;
             this.iname = iname;
             this.uid = uid;
+            this.filepath = buildFilePath(file, iname, time);
         }
 
         @Override
         public void run() {
-            @SuppressWarnings("null")
-            String filepath = fileDir + this.uid + "/" + this.iname + this.time
-                    + this.file.getOriginalFilename().substring(this.file.getOriginalFilename().lastIndexOf("."));
             File newFile = new File(filepath);
             File dir = newFile.getParentFile();
             if (!dir.exists()) {
-                // 创建文件夹
                 dir.mkdirs();
             }
-            // 创建文件
             try {
                 file.transferTo(newFile);
             } catch (IllegalStateException | IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -95,12 +97,8 @@ public class ImgServiceImp implements ImgService {
             throws IllegalStateException, IOException {
         AddImg addImg = new AddImg(file, iname, uid);
         addImg.start();
-        @SuppressWarnings("null")
-        String filepath = fileDir + addImg.uid + "/" + addImg.iname + addImg.time
-                + addImg.file.getOriginalFilename().substring(addImg.file.getOriginalFilename().lastIndexOf("."));
-        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(addImg.time)));
-        Integer a = imgMapper.add(addImg.iname, filepath,
-                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(addImg.time)), addImg.uid);
+        String uploadDate = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
+        Integer a = imgMapper.add(addImg.iname, addImg.filepath, uploadDate, addImg.uid);
         if (a != 1) {
             return new Statues<Integer>(0, "添加图片失败", null);
         } else {

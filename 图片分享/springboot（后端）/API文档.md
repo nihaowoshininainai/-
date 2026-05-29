@@ -152,6 +152,8 @@ Content-Type: multipart/form-data
 | `file` | File | 是 | 图片文件 |
 | `iname` | String | 是 | 图片名称 |
 
+> 上传的图片存入项目 `img/` 目录下，按日期分子目录，如 `img/2026-05-29/风景1716998400000.jpg`。
+
 **请求头**:
 
 ```
@@ -183,14 +185,14 @@ POST /api/deleteImg
 ```json
 {
   "iid": 1,
-  "isrc": "/mnt/nginx/html/1/example.jpg"
+  "isrc": "img/2026-05-29/风景1716998400000.jpg"
 }
 ```
 
 | 字段 | 类型 | 必填 | 说明 |
 |------|------|------|------|
 | `iid` | Integer | 是 | 图片ID |
-| `isrc` | String | 是 | 图片文件路径（可从图片详情获取） |
+| `isrc` | String | 是 | 图片文件路径（可从图片详情搜索结果的 `isrc` 字段获取） |
 
 **成功响应**:
 
@@ -229,8 +231,8 @@ GET /api/search?order=pageview&count=10&page=1&iname=风景
     {
       "iid": 1,
       "iname": "风景图",
-      "isrc": "/mnt/nginx/html/1/xxx.jpg",
-      "uploaddate": "2026-05-28 12:30:00",
+      "isrc": "img/2026-05-29/风景1716998400000.jpg",
+      "uploaddate": "2026-05-29",
       "user": {
         "uid": 1,
         "uname": "上传者用户名"
