@@ -10,11 +10,11 @@ import { DashboardModule } from './dashboard/dashboard.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'arks',
-      password: 'oo8579353',
-      database: 'mydb',
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT) || 3306,
+      username: process.env.DB_USERNAME || 'arks',
+      password: process.env.DB_PASSWORD || 'oo8579353',
+      database: process.env.DB_DATABASE || 'mydb',
       entities: [User, Img, Comment],
       autoLoadEntities: true,
     }),

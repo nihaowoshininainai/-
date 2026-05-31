@@ -1,0 +1,116 @@
+name: img-share
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: img-share-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: arks
+      MYSQL_PASSWORD: oo8579353
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: img-share-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass 12345678
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "12345678", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  springboot-backend:
+    build:
+      context: ./springboot（后端）/share
+      dockerfile: Dockerfile
+    container_name: img-share-springboot
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/mydb
+      SPRING_DATASOURCE_USERNAME: arks
+      SPRING_DATASOURCE_PASSWORD: oo8579353
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      SPRING_DATA_REDIS_PASSWORD: 12345678
+    volumes:
+      - springboot_uploads:/app/img
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  nestjs-backend:
+    build:
+      context: ./nestjs（管理系统后端)/img-share-manage
+      dockerfile: Dockerfile
+    container_name: img-share-nestjs
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USERNAME: arks
+      DB_PASSWORD: oo8579353
+      DB_DATABASE: mydb
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: 12345678
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  vue-web:
+    build:
+      context: ./vue3-web（前端）/imgshare
+      dockerfile: Dockerfile
+    container_name: img-share-vue-web
+    restart: always
+    ports:
+      - "8081:80"
+    depends_on:
+      - springboot-backend
+
+  vue-admin:
+    build:
+      context: ./vue3（管理系统前端）/img-share-manage
+      dockerfile: Dockerfile
+    container_name: img-share-vue-admin
+    restart: always
+    ports:
+      - "8082:80"
+    depends_on:
+      - nestjs-backend
+      - springboot-backend
+
+volumes:
+  mysql_data:
+  redis_data:
+  springboot_uploads:
+
+networks:
+  default:
+    name: img-share-network
